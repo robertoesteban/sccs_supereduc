@@ -15,7 +15,7 @@ class Region(models.Model):
                 ordering = ['id']
                 verbose_name_plural = 'Regiones'
 
-class Comuna(models.Model):
+class Provincia(models.Model):
         nombre = models.CharField("Nombre", max_length=60, blank=False, null=False)
 	region = models.ForeignKey("Region",Region)
         
@@ -23,6 +23,17 @@ class Comuna(models.Model):
                 return self.nombre
 
         class Meta:
-                ordering = ['nombre']
-                verbose_name_plural = 'Comunas'
+                ordering = ['region']
+                verbose_name_plural = 'Provincias'
 
+class Comuna(models.Model):
+        nombre = models.CharField("Nombre", max_length=60, blank=False, null=False)
+        provincia = models.ForeignKey("Provincia",Provincia)
+	region = models.ForeignKey("Region",Region)
+
+        def __str__(self):
+                return self.nombre
+
+        class Meta:
+                ordering = ['provincia']
+                verbose_name_plural = 'Comunas'
