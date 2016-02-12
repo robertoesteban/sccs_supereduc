@@ -67,6 +67,7 @@ target/
 personas/migrations/
 territorios/migrations/
 cometidos/migrations/
+establecimientos/migrations/
 db.sqlite3
 ScriptInicial.sh
 CargaInicial2.py
