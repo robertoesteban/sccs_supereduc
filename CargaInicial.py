@@ -1,4 +1,6 @@
+# -*- encoding: utf-8 -*-
 from personas.models import *
+from territorios.models import *
 Grado.objects.create(numero=1)
 Grado.objects.create(numero=2)
 Grado.objects.create(numero=3)
@@ -35,4 +37,18 @@ Unidad.objects.create(nombre="Fiscalizacion")
 Unidad.objects.create(nombre="Juridica")
 Unidad.objects.create(nombre="Denuncia")
 Unidad.objects.create(nombre="Gabinete")
-
+Region.objects.create(numero='XV',nombre='Region de Arica y Parinacota')
+Region.objects.create(numero='I',nombre='Region de Tarapaca')
+Region.objects.create(numero='II',nombre='Region de Antofagasta')
+Region.objects.create(numero='III',nombre='Region de Atacama')
+Region.objects.create(numero='IV',nombre='Region de Coquimbo')
+Region.objects.create(numero='V',nombre='Region de Valparaiso')
+Region.objects.create(numero='RM',nombre='Region Metropolitana de Santiago')
+Region.objects.create(numero='VI',nombre="Region del Libertador Bernado O'Higgins")
+Region.objects.create(numero='VII',nombre='Region del Maule')
+Region.objects.create(numero='VIII',nombre='Region del Bio Bio')
+Region.objects.create(numero='IX',nombre='Region de La Araucania')
+Region.objects.create(numero='XIV',nombre='Region de Los Rios')
+Region.objects.create(numero='X',nombre='Region de Los Lagos')
+Region.objects.create(numero='XI',nombre="Region de Aysen del General Carlos Ibanez del Campo")
+Region.objects.create(numero='XII',nombre='Region de Magallanes y La Antartica Chilena')

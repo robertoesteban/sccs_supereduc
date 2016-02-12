@@ -12,5 +12,5 @@ class Region(models.Model):
                 return self.nombre
 
         class Meta:
-                ordering = ['nombre']
+                ordering = ['id']
                 verbose_name_plural = 'Regiones'

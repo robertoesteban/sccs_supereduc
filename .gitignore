@@ -62,7 +62,8 @@ target/
 .ipynb_checkpoints
 
 #Migration de App personalizadas
-personas/migrations/
 .DS_Store
+personas/migrations/
+territorios/migrations/
 db.sqlite3
 ScriptInicial.sh

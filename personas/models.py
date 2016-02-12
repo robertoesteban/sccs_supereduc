@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from localflavor.cl.forms import CLRutField
 from django.utils import timezone
+from territorios.models import Region
 # Create your models here.
 
 OPCIONES_GENERO = (
@@ -75,6 +76,7 @@ class Persona(models.Model):
 	estamento = models.ForeignKey("Estamento",Estamento)
 	escalafon = models.ForeignKey("Escalafon",Escalafon)
 	unidad = models.ForeignKey("Unidad",Unidad)
+	region = models.ForeignKey(Region)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
         timestamp = models.DateTimeField(auto_now = False, auto_now_add=True)
 
