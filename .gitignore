@@ -63,6 +63,6 @@ target/
 
 #Migration de App personalizadas
 personas/migrations/
-
 .DS_Store
 db.sqlite3
+ScriptInicial.sh
