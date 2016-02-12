@@ -5,18 +5,11 @@ Esta aplicacion es creada para poder generar y seguir las solicitudes de Cometid
 de la Dirección Regional de la Superintendencia de Educacion, 
 
 
-## Prerequisitos
+## Versiones utilizadas
 
 * Python
-* Django
-
-  $ cd nombreRepositorio
-  nombreRepositorio/$ git config -l
-
- __git config__
+* Django 1.9.2
 
 ## Modulos adicionales a instalar
 
-    $ git config --global user.name "Su Nombre"
-    $ git config --global user.email "Su Correo"
-    $ git config --global core.editor "Su Editor ej. notepad"
+    # pip install https://pypi.python.org/packages/source/d/django-localflavor/django-localflavor-1.2.tar.gz
