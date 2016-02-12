@@ -4,7 +4,10 @@ from django.db import models
 from localflavor.cl.forms import CLRutField
 from django.utils import timezone
 from territorios.models import Region
+from django.contrib.auth.models import User, Permission
+from django.contrib.contenttypes.models import ContentType
 # Create your models here.
+
 
 OPCIONES_GENERO = (
 	('H','Hombre'),
@@ -64,12 +67,12 @@ class RutField(models.CharField):
                 return super(RutField, self).formfield(**defaults)
 
 
-
-class Persona(models.Model):
+class Persona(User):
         rut = RutField("Rut", unique=True, help_text='Ejemplo: 12.345.678-K')
 	nombres = models.CharField("Nombres", max_length=60, blank=False, null=False)
 	paterno = models.CharField("Apellido Paterno", max_length=60, blank=False, null=False)
 	materno = models.CharField("Apellido Materno", max_length=60, blank=False, null=False)
+	usuario = models.CharField("Usuario",unique=True, max_length=60, blank=False, null=False)
 	genero = models.CharField("Genero", max_length=1, choices=OPCIONES_GENERO)
 	correo = models.EmailField("Correo Electronico",unique=True, blank=False, null=False)
 	grado = models.ForeignKey("Grado", Grado)
@@ -89,3 +92,17 @@ class Persona(models.Model):
 	class Meta:
 		ordering = ['nombres']
 		verbose_name_plural = 'Personas'
+
+	def save(self):
+		self.username = self.usuario
+		rutlimpio = self.rut.replace('.','',2).replace('-','')
+		self.set_password(rutlimpio[len(self.rut)-10:len(self.rut)-4])
+		self.first_name = self.nombres
+		self.last_name = self.paterno + " " + self.materno
+		self.email = self.correo
+		self.is_staff = True
+		super(Persona,self).save()
+		permission = Permission.objects.get(codename='change_cometido')
+		super(Persona,self).user_permissions.add(permission)
+		permission = Permission.objects.get(codename='add_cometido')
+		super(Persona,self).user_permissions.add(permission)

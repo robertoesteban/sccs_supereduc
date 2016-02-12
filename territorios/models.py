@@ -29,7 +29,6 @@ class Provincia(models.Model):
 class Comuna(models.Model):
         nombre = models.CharField("Nombre", max_length=60, blank=False, null=False)
         provincia = models.ForeignKey("Provincia",Provincia)
-	region = models.ForeignKey("Region",Region)
 
         def __str__(self):
                 return self.nombre

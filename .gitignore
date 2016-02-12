@@ -63,7 +63,10 @@ target/
 
 #Migration de App personalizadas
 .DS_Store
+*.pyc
 personas/migrations/
 territorios/migrations/
+cometidos/migrations/
 db.sqlite3
 ScriptInicial.sh
+CargaInicial2.py
