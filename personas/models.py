@@ -21,6 +21,36 @@ class Grado(models.Model):
 		ordering = ['numero']
 		verbose_name_plural = 'Grados'
 
+class Estamento(models.Model):
+	nombre = models.CharField("Estamento", max_length=60, blank=False, null=False)
+
+	def __str__(self):
+		return self.nombre
+
+	class Meta:
+		ordering = ['nombre']
+		verbose_name_plural = 'Estamentos'
+
+
+class Escalafon(models.Model):
+        nombre = models.CharField("Escalafon", max_length=60, blank=False, null=False)
+
+        def __str__(self):
+                return self.nombre
+
+        class Meta:
+                ordering = ['nombre']
+                verbose_name_plural = 'Escalafones'
+
+class Unidad(models.Model):
+        nombre = models.CharField("Unidad", max_length=60, blank=False, null=False)
+
+        def __str__(self):
+                return self.nombre
+
+        class Meta:
+                ordering = ['nombre']
+                verbose_name_plural = 'Unidades'
 
 class RutField(models.CharField):
         def __init__(self, *args, **kwargs):
@@ -42,6 +72,9 @@ class Persona(models.Model):
 	genero = models.CharField("Genero", max_length=1, choices=OPCIONES_GENERO)
 	correo = models.EmailField("Correo Electronico",unique=True, blank=False, null=False)
 	grado = models.ForeignKey("Grado", Grado)
+	estamento = models.ForeignKey("Estamento",Estamento)
+	escalafon = models.ForeignKey("Escalafon",Escalafon)
+	unidad = models.ForeignKey("Unidad",Unidad)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
         timestamp = models.DateTimeField(auto_now = False, auto_now_add=True)
 
