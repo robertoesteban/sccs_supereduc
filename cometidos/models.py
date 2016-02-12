@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from personas.models import *
 from territorios.models import *
+from django.utils import timezone
 
 # Create your models here.
 class Cometido(models.Model):
@@ -14,3 +15,11 @@ class Cometido(models.Model):
 	escalafon = models.CharField("Escalafon",max_length=60,blank=False,null=False,editable=False)
 	unidad = models.CharField("Unidad",max_length=60,blank=False,null=False,editable=False)
 	region = models.CharField("Region",max_length=60,blank=False,null=False,editable=False)
+
+
+class Destino(models.Model):
+	fecha = models.DateField("Fecha", blank=False,null=False)
+	lugar = models.CharField("Lugar", max_length=60, blank=False, null=False)
+	pernoctar = models.BooleanField("Con Pernoctar",default=False)
+	cometido = models.ForeignKey(Cometido)
+

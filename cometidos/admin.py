@@ -4,9 +4,17 @@ from personas.models import *
 from territorios.models import *
 from django.db import models
 # Register your models here.
+class DestinoInline(admin.TabularInline):
+	model = Destino
+	extra = 1
 
 class CometidoAdmin(admin.ModelAdmin):
 	list_display = ('rut','nombre')
+
+#	fieldsets = (
+#                ('Destios', {'fields': ['rut',DestinoInline], 'classes': ['collapse']})
+#)
+
 
 	def save_model(self, request, obj, form, change):
 		if not change: 
@@ -24,5 +32,7 @@ class CometidoAdmin(admin.ModelAdmin):
 		if obj: # editing an existing object
 			return self.readonly_fields + ('rut', 'nombre','grado','escalafon','unidad','region')
 		return self.readonly_fields
+
+	inlines = [DestinoInline]
 
 admin.site.register(Cometido,CometidoAdmin)
