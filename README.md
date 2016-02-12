@@ -7,7 +7,7 @@ de la Dirección Regional de la Superintendencia de Educacion,
 
 ## Versiones utilizadas
 
-* Python
+* Python 2.7.6
 * Django 1.9.2
 
 ## Modulos adicionales a instalar
