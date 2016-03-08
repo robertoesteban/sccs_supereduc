@@ -9,11 +9,20 @@ class DestinoInline(admin.TabularInline):
 	extra = 1
 
 class CometidoAdmin(admin.ModelAdmin):
-	list_display = ('rut','nombre')
-
+	list_display = ('creado','nombre')
+#	readonly_fields = ( 'nombre','rut','grado')
 #	fieldsets = (
-#                ('Destios', {'fields': ['rut',DestinoInline], 'classes': ['collapse']})
-#)
+#		('Informacion Personal', {'fields': [ 'nombre',( 'rut','grado','estamento','escalafon'), 'unidad'],  'classes': ['collapse']}),
+#		('Especificaciones', {'fields': ['convocadopor'], 'classes': ['collapse'] }),
+#	)
+
+	
+#	def get_queryset(self, request):
+#		qs = super(CometidoAdmin, self).get_queryset(request)
+#		if request.user.is_superuser:
+#			return qs
+#		return qs.filter(persona = request.user)
+
 
 
 	def save_model(self, request, obj, form, change):
@@ -22,6 +31,7 @@ class CometidoAdmin(admin.ModelAdmin):
 			obj.rut = persona.rut
 			obj.grado = persona.grado
 			obj.escalafon = persona.escalafon
+			obj.estamento = persona.estamento
 			obj.nombre = request.user.first_name + ' ' + request.user.last_name
 			obj.persona = request.user
 			obj.unidad = persona.unidad
@@ -30,8 +40,10 @@ class CometidoAdmin(admin.ModelAdmin):
 
 	def get_readonly_fields(self, request, obj=None):
 		if obj: # editing an existing object
-			return self.readonly_fields + ('rut', 'nombre','grado','escalafon','unidad','region')
-		return self.readonly_fields
+			return self.readonly_fields + ('rut', 'nombre','grado','estamento','escalafon','unidad','region')
+		else:
+			return self.readonly_fields
+
 
 	inlines = [DestinoInline]
 
