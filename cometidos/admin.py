@@ -11,10 +11,10 @@ class DestinoInline(admin.TabularInline):
 class CometidoAdmin(admin.ModelAdmin):
 	list_display = ('creado','nombre')
 #	readonly_fields = ( 'nombre','rut','grado')
-#	fieldsets = (
-#		('Informacion Personal', {'fields': [ 'nombre',( 'rut','grado','estamento','escalafon'), 'unidad'],  'classes': ['collapse']}),
-#		('Especificaciones', {'fields': ['convocadopor'], 'classes': ['collapse'] }),
-#	)
+	fieldsets = (
+		('Informacion Personal', {'fields': [ 'nombre',( 'rut','grado','estamento','escalafon'), 'unidad'],  'classes': ['collapse']}),
+		('Especificaciones', {'fields': ['convocadopor', 'financiagastosde'], 'classes': ['collapse'] }),
+	)
 
 	
 #	def get_queryset(self, request):
@@ -38,11 +38,11 @@ class CometidoAdmin(admin.ModelAdmin):
 			obj.region = persona.region
 			obj.save()
 
-	def get_readonly_fields(self, request, obj=None):
-		if obj: # editing an existing object
-			return self.readonly_fields + ('rut', 'nombre','grado','estamento','escalafon','unidad','region')
-		else:
-			return self.readonly_fields
+#	def get_readonly_fields(self, request, obj=None):
+#		if obj: # editing an existing object
+#			return self.readonly_fields + ('rut', 'nombre','grado','estamento','escalafon','unidad','region','persona','convocadopor')
+#		else:
+#			return self.readonly_fields
 
 
 	inlines = [DestinoInline]
