@@ -6,6 +6,7 @@ from personas.models import *
 from territorios.models import *
 from establecimientos.models import *
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 #from multiselectfield import MultiSelectField
 
 # Create your models here.
@@ -50,7 +51,8 @@ class Cometido(models.Model):
                 verbose_name_plural = 'Cometidos'
 	#	exclude = ('rut','nombre','grado','escalafon','estamento','unidad','region')
 
-
+	def get_absolute_url(self):
+		return reverse("cometidos:detail", kwargs={"id": self.id})
 
 class Destino(models.Model):
 	fecha = models.DateField("Fecha", blank=False,null=False)
