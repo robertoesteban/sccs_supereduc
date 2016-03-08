@@ -7,3 +7,4 @@ class EstablecimientoAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Establecimiento,EstablecimientoAdmin)
+admin.site.register(Sostenedor)
