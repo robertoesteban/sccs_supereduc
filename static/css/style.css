@@ -1,0 +1,71 @@
+@CHARSET "UTF-8";
+
+section#main
+{
+    width: 990px;
+    height: auto;
+    text-align: left;
+    margin: 0 auto;
+}
+
+
+/* Estilo Header */
+
+header#top {
+	width: 990px;
+	margin: 0 auto;
+	position: relative;
+	height: 175px;
+}
+
+header#top h1.logo {
+    margin: 0;
+    width: 296px;
+    height: 135px;
+    background: url(/static/img/logo.png) no-repeat;
+    text-indent: -10000px;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    z-index: 100;
+}
+
+header#top div#tools {
+    width: 795px;
+    height: 95px;
+    /*background-color: #f6f6f6;*/
+    position: absolute;
+    top: 20px;
+    right: 6px;
+    padding: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+header#top div#tools .title {
+    font-size: 20px;
+    display: inline-block;
+}
+
+
+/* Footer */
+footer div#ribbon
+{
+    background: #f6f6f6 url(/static/img/footer-final.png) top center no-repeat;
+    height: 90px;
+    position: relative;
+    text-align: left;
+    padding-top: 5px;
+
+}
+
+footer div#ribbon a
+{
+    position: absolute;
+    bottom: 0;
+    left: 32px;
+    width: 117px;
+    height: 23px;
+    background: url(/static/img/ribbon.png) center top no-repeat;
+    text-indent: -10000px;
+}

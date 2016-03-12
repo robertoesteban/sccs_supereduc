@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block head_title %} Inicio | {{ block.super }}{% endblock head_title %}
+
+{% block header %} {{ block.super }}{% endblock header %}            
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-primary" style="text-align: justify">
+            <div class="panel-heading text-center"><strong>Informaci&oacute;n</strong></div>
+            <div style="padding: 10px;">
+                <p>El sistema de Solicitud de Cometidos y Comisiones de Servicio, es una herramienta para que los funcionarios puedan registrar sus solicitud via web, tambie&oacute;n puedan seguir el estado de las mismas.</p> 
+<div id="navigator">
+        {% if user.is_authenticated %}
+                <p><a href='/cometidos'>Cometidos</a></p>
+                <p><a href='/cometidos/crear'>Crear Cometido</a></p>
+	{% endif %}
+</div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="panel panel-primary" style="text-align: justify">
+            <div class="panel-heading text-center"><strong>Informaci&oacute;n Sistema de Solicitud de Cometidos</strong></div>
+            <div style="padding: 10px;">
+                <p>El sistema de rendici&oacute;n de cuentas debe ser utilizado solamente con los navegadores Chrome o Mozilla Firefox. 
+                    No se debe utilizar el aplicativo con el navegador Explorer .</p>
+            </div>
+        </div>
+    </div>
+    
+    
+                
+
+                
+                
+                
+				
+                
+    </div>
+    
+    
+    
+    
+</div>
+    </div>
+{% endblock content %}

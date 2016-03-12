@@ -13,7 +13,7 @@ class CometidoAdmin(admin.ModelAdmin):
 #	readonly_fields = ( 'nombre','rut','grado')
 	fieldsets = (
 		('Informacion Personal', {'fields': [ 'nombre',( 'rut','grado','estamento','escalafon'), 'unidad'],  'classes': ['collapse']}),
-		('Especificaciones', {'fields': ['convocadopor', 'financiagastosde'], 'classes': ['collapse'] }),
+		('Especificaciones', {'fields': ['convocadopor'], 'classes': ['collapse'] }),
 	)
 
 	

@@ -1,13 +1,9 @@
-<!--DOCTYPE html -->
-<html>
-<head>
-	<title>Add Cometido</title>
-</head>
-<body>
+{% extends "base2.html" %}
+
+{% block content %}
 <h1>Crear Cometido</h1>
 <form method='POST' action=''>{% csrf_token %}
 	{{ form.as_p }}
 	<input type='submit' value='Crear Cometido'>
 </form>	
-</body>
-</html>
+{% endblock content %}

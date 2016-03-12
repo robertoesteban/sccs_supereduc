@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <h1>{{ title }}</h1>
+
+	{% for obj in object_list %}
+		{{ obj.rut}}<br/>
+		{{ obj.nombre}}<br/>
+		<a href='{{ obj.get_absolute_url }}' > {{ obj.actualizado | date:"D, d/m/Y" }}</a><br/>
+		<br/>
+	{% endfor %}
+
+{% endblock content %}

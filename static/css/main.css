@@ -1,0 +1,181 @@
+@CHARSET "UTF-8";
+
+header#top {
+    width: 990px;
+    margin: 0 auto;
+    position: relative;
+    height: 175px;
+}
+
+header#topEnc {
+    width: 99%;
+    margin: 0 auto;
+    position: relative;
+    height: 175px;
+}
+
+header#top h1.logo {
+    margin: 0;
+    width: 296px;
+    height: 135px;
+    background: url(/static/img/logo.png) no-repeat;
+    text-indent: -10000px;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    z-index: 100;
+}
+
+header#topEnc h1.logoEnc {
+    margin: 0;
+    width: 296px;
+    height: 135px;
+    background: url(../img/logo.png) no-repeat;
+    text-indent: -10000px;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    z-index: 100;
+}
+
+header#top h1.logo a {
+    display: block;
+    width: 172px;
+    height: 169px;
+    outline: 0 none;
+}
+
+header#topEnc h1.logoEnc a {
+    display: block;
+    width: 172px;
+    height: 169px;
+    outline: 0 none;
+}
+
+header#top div#tools {
+    width: 795px;
+    height: 95px;
+    /*background-color: #f6f6f6;*/
+    position: absolute;
+    top: 20px;
+    right: 6px;
+    padding: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+header#topEnc div#toolsEnc {
+    width: 80%;
+    height: 95px;
+    /*background-color: #f6f6f6;*/
+    position: absolute;
+    top: 32px;
+    right: 6px;
+    padding: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+header#top div#tools .title {
+    font-size: 20px;
+    display: inline-block;
+}
+
+header#topEnc div#toolsEnc .titleEnc {
+    font-size: 23px;
+    display: inline-block;
+}
+
+header#top div#tools form {
+    float: right;
+}
+header#topEnc div#toolsEnc form {
+    float: right;
+}
+
+
+section#main
+{
+    width: 990px;
+    height: auto;
+    text-align: left;
+    margin: 0 auto;
+}
+
+/* estilos para el footer */
+
+
+/* estilos para el menu inferior, debajo del footer */
+
+/*Footer*/
+footer div#ribbon
+{
+    background: #f6f6f6 url(../img/footer/footer-final.png) top center no-repeat;
+    height: 90px;
+    position: relative;
+    text-align: left;
+    padding-top: 5px;
+
+}
+footer div#ribbonEnc
+{
+    background: #f6f6f6 url(../img/footer/footer-final.png) top center no-repeat;
+    height: 90px;
+    position: relative;
+    text-align: left;
+    padding-top: 5px;
+
+}
+footer div#ribbon a
+{
+    position: absolute;
+    bottom: 0;
+    left: 32px;
+    width: 117px;
+    height: 23px;
+    background: url(../img/footer/ribbon.png) center top no-repeat;
+    text-indent: -10000px;
+}
+footer div#ribbonEnc a
+{
+    position: absolute;
+    bottom: 0;
+    left: 37px;
+    width: 117px;
+    height: 23px;
+    background: url(../img/footer/ribbon.png) center top no-repeat;
+    text-indent: -10000px;
+}
+
+
+.modalLoading {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('../img/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}
+
+.formContact {
+    position: fixed;
+    right: 0px; 
+    bottom: 0px; 
+    width:180px;
+}

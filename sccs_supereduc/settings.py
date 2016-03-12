@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     'personas.apps.PersonasConfig',
     'territorios.apps.TerritoriosConfig',
     'cometidos.apps.CometidosConfig',
+    'home.apps.HomeConfig',
     'establecimientos.apps.EstablecimientosConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -86,6 +88,8 @@ DATABASES = {
     }
 }
 
+LOGIN_URL = reverse_lazy('login')
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -124,3 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]

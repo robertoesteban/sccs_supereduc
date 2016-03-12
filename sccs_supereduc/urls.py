@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from home  import views
 
 urlpatterns = [
+    url(r'^$', views.home_index),
+    url(r'^login/$', views.login_page, name="login"),
+    url(r'^logout/$', views.logout_view, name="logout"),
     url(r'^admin/', admin.site.urls),
     url(r'^cometidos/', include("cometidos.urls", namespace='cometidos')),
 ]
