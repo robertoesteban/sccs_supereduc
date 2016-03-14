@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<p id="CrearCometido" class="text-right">
+	<a class="btn btn-success" href="/cometidos">Mis Cometidos</a>
+	<a class="btn btn-success" href="/cometidos/crear">Crear Cometido</a>
+</p>
+<p id="Edicion" class="text-right">
+	<a class='btn btn-default'  href='{{ obj.get_absolute_url }}edit'><i class='fa fa-pencil-square-o fa-fw'></i></a> <a class='btn  btn-default' href='{{ obj.get_absolute_url }}'><i class='fa fa-print'></i></a>
+</p>
+<div class="panel panel-info" style="text-align: justtify;">
+        <div class="panel-heading text-left">
+                <strong>I.- IDENTIFICACION</strong>
+        </div>
+        <div id="funcionario" style="padding: 10px;">
+                <table class="table table-bordered table-hover">
+                <tbody>
+                        <tr>
+                                <td width="20%"><label>Nombre </label></td>
+                                <td width="80%" colspan=5>{{ instance.nombre }}</td>
+                        </tr>
+                        <tr>
+                                <td><label>Rut</label></td>
+                                <td>{{ instance.rut }}</td>
+                                <td><label>Grado</label></td>
+                                <td>{{ instance.grado }}</td>
+                                <td><label>Estamento</label></td>
+                                <td>{{ instance.estamento }}</td>
+                        </tr>
+                        <tr>
+                                <td><label>Escalafon</label></td>
+                                <td>{{ instance.escalafon }}</td>
+                                <td><label>Unidad</label></td>
+                                <td colspan=3>{{ instance.unidad }}</td>
+                        </tr>
+                        <tr>
+                                <td><label>Region</label></td>
+                                <td colspan=5>{{ instance.region }}</td>
+                        </tr>
+                </tbody>
+                </table>
+        </div>
+</div>
+<div class="panel panel-info" style="text-align: justtify;">
+        <div class="panel-heading text-left">
+                <strong>II.- ESPECIFICACION</strong>
+        </div>
+        <div style="padding: 10px;" id="especificacion">
+        </div>
+</div>
+<div class="panel panel-info" style="text-align: justtify;">
+        <div class="panel-heading text-left">
+                <strong>III.- INFORMACION ADICIONAL</strong>
+        </div>
+        <div style="padding: 10px;" id="adicional">
+                <table class="table table-bordered table-hover">
+                <tbody>
+                        <tr>
+                                <td width="20%"><label>Convocado por </label></td>
+                                <td width="80%" colspan=7>{{ instance.convocadopor }}</td>
+                        </tr>
+                        <tr>
+                                <td><label>Financia Gastos de </label></td>
+                                <td colspan=7>{{ instance.financiagastosde }}</td>
+                        </tr>
+			<tr>
+				<td colspan=8><strong>VIATICOS</strong></td>
+			</tr>
+			<tr>
+				<td><label>Dias al 100%</label></td>
+				<td>{{ instance.al100 }}</td>
+				<td><label>Dias al 60%</label></td>
+				<td>{{ instance.al60 }}</td>
+				<td><label>Dias al 50%</label></td>
+				<td>{{ instance.al50 }}</td>
+				<td><label>Dias al 40%</label></td>
+				<td>{{ instance.al40 }}</td>
+			</tr>
+                        <tr>
+                                <td><label>Con derecho a Viatico </label></td>
+                                <td colspan=7>{{ instance.derechoaviatico }}</td>
+                        </tr>
+                        <tr>
+                                <td><label>Dia de Salida </label></td>
+                                <td colspan=3>{{ instance.diadesalida }}</td>
+                                <td><label>Hora de Salida </label></td>
+                                <td colspan=3>{{ instance.horadesalida }}</td>
+                        </tr>
+                        <tr>
+                                <td><label>Dia de Llegada </label></td>
+                                <td colspan=3>{{ instance.diadellegada }}</td>
+                                <td><label>Hora de Llegada </label></td>
+                                <td colspan=3>{{ instance.horadellegada }}</td>
+                        </tr>
+                </tbody>
+                </table>
+        </div>
+</div>
+{% endblock content %}

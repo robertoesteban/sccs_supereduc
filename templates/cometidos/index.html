@@ -1,13 +1,37 @@
 {% extends "base.html" %}
 
+
+
 {% block content %}
-        <h1>{{ title }}</h1>
 
-	{% for obj in object_list %}
-		{{ obj.rut}}<br/>
-		{{ obj.nombre}}<br/>
-		<a href='{{ obj.get_absolute_url }}' > {{ obj.actualizado | date:"D, d/m/Y" }}</a><br/>
-		<br/>
-	{% endfor %}
-
+	<p id="CrearCometido" class="text-right">
+		<a class="btn btn-success" href="/cometidos/crear">Crear Cometido</a>
+	</p>
+	<div class="panel panel-info" style="text-align: justtify;">
+        	<div class="panel-heading text-center">
+                	<strong>MIS COMETIDOS</strong>
+        	</div>
+	<div id="funcionario" style="padding: 10px;">
+                <table class="table table-bordered table-hover">
+		<thead>
+			<td width="3%"><label>Nº</label></td>
+                        <td width="15%">Ultima Modificacion</td>
+			<td width="40%">Nombre</td>
+			<td width="15%">Rut</td>
+			<td width="20%"></td>
+		</thead>
+                <tbody>	
+		{% for obj in object_list %}
+		        <tr>
+                                <td><label></label></td>
+                                <td><label>{{ obj.actualizado | date:"D, d/m/Y" }}</label></td>
+                                <td><label>{{ obj.nombre }}</label></td>
+                                <td><label>{{ obj.rut }}</label></td>
+                                <td><a class='btn btn-default' href='{{ obj.get_absolute_url }}'> <i class='fa fa-eye fa-fw'></i></a> <a class='btn btn-default'  href='{{ obj.get_absolute_url }}edit'><i class='fa fa-pencil-square-o fa-fw'></i></a> <a class='btn  btn-default' href='{{ obj.get_absolute_url }}'><i class='fa fa-print'></i></a></td>
+                        </tr>
+		</tbody>
+		{% endfor %}
+		</table>
+	</div>
+</div>
 {% endblock content %}

@@ -8,7 +8,7 @@ from establecimientos.models import *
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django import forms
-#from multiselectfield import MultiSelectField
+from multiselectfield import MultiSelectField
 
 # Create your models here.
 
@@ -34,8 +34,17 @@ class Cometido(models.Model):
 	estamento = models.CharField("Estamento",max_length=60,blank=False,null=False)
 	unidad = models.CharField("Unidad",max_length=60,blank=False,null=False)
 	region = models.CharField("Region",max_length=60,blank=False,null=False)
-	convocadopor = models.CharField("Convocado por", max_length=2, choices=OPCIONES_CONVOCADOPOR,blank=False,null=False)
-#	financiagastosde = MultiSelectField(choices=OPCIONES_FINANCIAGASTOSDE)
+	convocadopor = models.CharField("Convocado por", max_length=2, choices=OPCIONES_CONVOCADOPOR)
+	financiagastosde = MultiSelectField(choices=OPCIONES_FINANCIAGASTOSDE)
+	derechoaviatico = models.BooleanField("Con derecho a viatico",default=False) 
+	diadesalida = models.DateField("Dia de salida",blank=True, null=True)
+	horadesalida = models.TimeField("Hora de salida",blank=True, null=True)
+	diadellegada = models.DateField("Dia de llegada",blank=True, null=True)
+	horadellegada = models.TimeField("Hora de llegada",blank=True, null=True)
+	al100 = models.PositiveIntegerField("Dias al 100%", default=0)
+	al60 = models.PositiveIntegerField("Dias al 60%", default=0)
+	al50 = models.PositiveIntegerField("Dias al 50%", default=0)
+	al40 = models.PositiveIntegerField("Dias al 40%", default=0)
 	actualizado = models.DateTimeField('Actualizado',auto_now=True, auto_now_add=False)
         creado = models.DateField('Creado',auto_now = False, auto_now_add=True)
 	#def __str__(self):

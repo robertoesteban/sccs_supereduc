@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+ <p id="CrearCometido" class="text-right">
+                <a class="btn btn-success" href="/cometidos">Mis Cometidos</a>
+        </p>
+<form method='POST' action=''>{% csrf_token %}
+<div class="panel panel-info" style="text-align: justtify;">
+	<div class="panel-heading text-left">
+		<strong>I.- IDENTIFICACION</strong>
+	</div>
+	<div id="funcionario" style="padding: 10px;">
+		<table class="table table-bordered table-hover">
+		<tbody>
+			<tr>
+				<td width="20%"><label>Nombre </label></td>
+				<td width="80%" colspan=7>{{ form.nombre }} {{ form.nombre.errors }}</td>
+			</tr>
+			<tr>
+				<td><label>Rut</label></td>
+				<td>{{ form.rut }} {{ form.rut.errors }}</td>
+				<td><label>Grado</label></td>
+				<td>{{ form.grado }} {{ form.grado.errors }}</td>
+				<td><label>Estamento</label></td>
+				<td colspan=3>{{ form.estamento }} {{ form.estamento.errors }}</td>
+			</tr>
+			<tr>
+				<td><label>Escalafon</label></td>
+				<td>{{ form.escalafon }} {{ form.escalafon.errors }}</td>
+				<td><label>Unidad</label></td>
+				<td colspan=5>{{ form.unidad }} {{ form.unidad.errors }}</td>
+			</tr>
+			<tr>
+				<td><label>Region</label></td>
+				<td colspan=7>{{ form.region }} {{ form.region.errors }}</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="panel panel-primary" style="text-align: justtify;">
+	<div class="panel-heading text-left">
+		<strong>II.- ESPECIFICACION</strong>
+	</div>
+	<div style="padding: 10px;" id="especificacion">
+	</div>
+</div>
+<div class="panel panel-primary" style="text-align: justtify;">
+	<div class="panel-heading text-left">
+		<strong>III.- INFORMACION ADICIONAL</strong>
+	</div>
+	<div style="padding: 10px;" id="adicional">	
+		<table class="table table-bordered table-hover">
+		<tbody>
+			<tr>
+				<td width="20%"><label>Convocado por </label></td>
+				<td width="80%" colspan=7>{{ form.convocadopor }} {{ form.convocadopor.errors }}</td>
+			</tr>
+			<tr>
+				<td><label>Financia Gastos de </label></td>
+				<td colspan=7>{{ form.financiagastosde }} {{ form.financiagastosde.errors }}</td>
+			</tr>
+			<tr>
+				<td colspan=8><strong>VIATICOS</strong></td>
+			</tr>
+			<tr>
+				<td><label>Dias al 100%</label></td>
+				<td>{{ form.al100 }} {{ form.al100.errors }}</td>
+				<td><label>Dias al 60%</label></td>
+				<td>{{ form.al60 }} {{ form.al60.errors }}</td>
+				<td><label>Dias al 50%</label></td>
+				<td>{{ form.al50 }} {{ form.al50.errors }}</td>
+				<td><label>Dias al 40%</label></td>
+				<td>{{ form.al40 }} {{ form.al40.errors }}</td>
+			</tr>
+			<tr>
+				<td><label>Con derecho a Viatico </label></td>
+				<td colspan=7>{{ form.derechoaviatico }} {{ form.derechoaviatico.errors }}</td>
+			</tr>
+			<tr>
+				<td><label>Dia de Salida </label></td>
+				<td colspan=3>{{ form.diadesalida }} {{ form.diadesalida.errors }}</td>
+				<td><label>Hora de Salida </label></td>
+				<td colspan=3>{{ form.horadesalida }} {{ form.horadesalida.errors }}</td>
+			</tr>
+			<tr>
+				<td><label>Dia de Llegada </label></td>
+				<td colspan=3>{{ form.diadellegada }} {{ form.diadellegada.errors }}</td>
+				<td><label>Hora de Llegada </label></td>
+				<td colspan=3>{{ form.horadellegada }} {{ form.horadellegada.errors }}</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+</div>
+<p id="GuardarCometido" class="text-center">
+	<input type='submit' class = "btn btn-danger" value='Crear Cometido'>
+        </p>
+</form>
+
+
+<script type="text/javascript">
+    $("#id_diadesalida").datetimepicker({format: 'dd/mm/yyyy', minView:2, autoclose : true , language : 'es'}).find('input').addClass("form_diadesalida");
+    $("#id_diadellegada").datetimepicker({format: 'dd/mm/yyyy', minView:2, autoclose: true ,language : 'es'}).find('input').addClass("form_diadellegada");
+    $("#id_horadesalida").datetimepicker({format: 'hh:ii', minView:0, maxView:1, autoclose : true , language : 'es',startView:1}).find('input').addClass("form_horadesalida");
+    $("#id_horadellegada").datetimepicker({format: 'hh:ii', minView:0, maxView:1, autoclose : true , language : 'es',startView:1}).find('input').addClass("form_horadellegada");
+</script>            
+
+	
+{% endblock content %}
