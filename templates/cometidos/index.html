@@ -23,11 +23,11 @@
                 <tbody>	
 		{% for obj in object_list %}
 		        <tr>
-                                <td><label></label></td>
+                                <td><label>{{ obj.id }}</label></td>
                                 <td><label>{{ obj.actualizado | date:"D, d/m/Y" }}</label></td>
                                 <td><label>{{ obj.nombre }}</label></td>
                                 <td><label>{{ obj.rut }}</label></td>
-                                <td><a class='btn btn-default' href='{{ obj.get_absolute_url }}'> <i class='fa fa-eye fa-fw'></i></a> <a class='btn btn-default'  href='{{ obj.get_absolute_url }}edit'><i class='fa fa-pencil-square-o fa-fw'></i></a> <a class='btn  btn-default' href='{{ obj.get_absolute_url }}'><i class='fa fa-print'></i></a></td>
+                                <td><a class='btn btn-default' href='{{ obj.get_absolute_url }}'> <i class='fa fa-eye fa-fw'></i></a> <a class='btn btn-default'  href='{{ obj.get_absolute_url }}edit'><i class='fa fa-pencil-square-o fa-fw'></i></a> <a class='btn  btn-default' href='{{ obj.get_absolute_url }}print'><i class='fa fa-print'></i></a></td>
                         </tr>
 		</tbody>
 		{% endfor %}

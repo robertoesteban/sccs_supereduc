@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from personas.models import *
 from territorios.models import *
 from establecimientos.models import *
+from mediosdetransporte.models import *
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django import forms
@@ -22,7 +23,6 @@ OPCIONES_CONVOCADOPOR = (
 OPCIONES_FINANCIAGASTOSDE = (
         ('AJ','Alojamiento'),
         ('AM','Alimentacion'),
-	('NN','Ninguno')
         )
 
 class Cometido(models.Model):
@@ -34,8 +34,8 @@ class Cometido(models.Model):
 	estamento = models.CharField("Estamento",max_length=60,blank=False,null=False)
 	unidad = models.CharField("Unidad",max_length=60,blank=False,null=False)
 	region = models.CharField("Region",max_length=60,blank=False,null=False)
-	convocadopor = models.CharField("Convocado por", max_length=2, choices=OPCIONES_CONVOCADOPOR)
-	financiagastosde = MultiSelectField(choices=OPCIONES_FINANCIAGASTOSDE)
+	convocadopor = models.CharField("Convocado por", max_length=2, choices=OPCIONES_CONVOCADOPOR,blank=True, null=True)
+	financiagastosde = MultiSelectField(choices=OPCIONES_FINANCIAGASTOSDE,blank=True, null=True)
 	derechoaviatico = models.BooleanField("Con derecho a viatico",default=False) 
 	diadesalida = models.DateField("Dia de salida",blank=True, null=True)
 	horadesalida = models.TimeField("Hora de salida",blank=True, null=True)
@@ -45,6 +45,11 @@ class Cometido(models.Model):
 	al60 = models.PositiveIntegerField("Dias al 60%", default=0)
 	al50 = models.PositiveIntegerField("Dias al 50%", default=0)
 	al40 = models.PositiveIntegerField("Dias al 40%", default=0)
+	viaaerea = models.BooleanField("Via Aerea",default=False)
+	lineaaerea = models.ForeignKey(LineaAerea,blank=True, null=True)
+	viaffcc = models.BooleanField("Via FFCC",default=False)
+	viabus = models.BooleanField("Via Bus",default=False)
+	lineabus = models.ForeignKey(LineaBus,blank=True, null=True)
 	actualizado = models.DateTimeField('Actualizado',auto_now=True, auto_now_add=False)
         creado = models.DateField('Creado',auto_now = False, auto_now_add=True)
 	#def __str__(self):

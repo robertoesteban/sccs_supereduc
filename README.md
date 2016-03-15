@@ -13,3 +13,4 @@ de la Dirección Regional de la Superintendencia de Educacion,
 ## Modulos adicionales a instalar
 
     # pip install https://pypi.python.org/packages/source/d/django-localflavor/django-localflavor-1.2.tar.gz
+    # pip install reportlab

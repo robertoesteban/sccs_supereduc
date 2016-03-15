@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 from personas.models import *
 from territorios.models import *
+from mediosdetransporte.models import *
+
 Grado.objects.create(numero=1)
 Grado.objects.create(numero=2)
 Grado.objects.create(numero=3)
@@ -158,4 +160,27 @@ Provincia.objects.create(nombre="Antartica Chilena",region=Region.objects.get(pk
 Provincia.objects.create(nombre="Tierra del Fuego",region=Region.objects.get(pk=15))
 Provincia.objects.create(nombre="Ultima Esperanza",region=Region.objects.get(pk=15))
 
+LineaAerea.objects.create(nombre="LAN Airline")
+LineaAerea.objects.create(nombre="SKY Airline")
+
+LineaBus.objects.create(nombre="Buses Cruz del Sur")
+LineaBus.objects.create(nombre="Buses Igi Llaima")
+LineaBus.objects.create(nombre="Buses Pirihueico")
+LineaBus.objects.create(nombre="Buses Pullman Bus")
+LineaBus.objects.create(nombre="Buses TurBus")
+LineaBus.objects.create(nombre="Buses Jac")
+LineaBus.objects.create(nombre="Buses Condor")
+LineaBus.objects.create(nombre="Buses Inter Sur")
+LineaBus.objects.create(nombre="Buses Via Bariloche")
+LineaBus.objects.create(nombre="Buses Fierro")
+LineaBus.objects.create(nombre="Buses ETM")
+LineaBus.objects.create(nombre="Bus Norte ")
+LineaBus.objects.create(nombre="Buses Cidher")
+LineaBus.objects.create(nombre="Buses JM")
+LineaBus.objects.create(nombre="Buses Pullman del Sur")
+LineaBus.objects.create(nombre="Buses Linea Azul")
+LineaBus.objects.create(nombre="Buses NarBus")
+LineaBus.objects.create(nombre="Buses ThaeBus")
+LineaBus.objects.create(nombre="Buses Tepual")
+LineaBus.objects.create(nombre="Buses Lagos del Sur")
 

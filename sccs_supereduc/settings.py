@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'personas.apps.PersonasConfig',
     'territorios.apps.TerritoriosConfig',
     'cometidos.apps.CometidosConfig',
+    'mediosdetransporte.apps.MediosdetransporteConfig',
     'home.apps.HomeConfig',
     'establecimientos.apps.EstablecimientosConfig',
     'django.contrib.admin',

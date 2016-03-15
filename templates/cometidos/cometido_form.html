@@ -64,7 +64,7 @@
 				<td colspan=7>{{ form.financiagastosde }} {{ form.financiagastosde.errors }}</td>
 			</tr>
 			<tr>
-				<td colspan=8><strong>VIATICOS</strong></td>
+				<td colspan=8><strong>Viaticos</strong></td>
 			</tr>
 			<tr>
 				<td><label>Dias al 100%</label></td>
@@ -91,6 +91,25 @@
 				<td colspan=3>{{ form.diadellegada }} {{ form.diadellegada.errors }}</td>
 				<td><label>Hora de Llegada </label></td>
 				<td colspan=3>{{ form.horadellegada }} {{ form.horadellegada.errors }}</td>
+			</tr>
+			<tr>
+				<td colspan=8><strong>Medio de Transporte a utilizar para el cometido</strong></td>
+			</tr>
+			<tr>
+				<td><label>Via Aerea</label></td>
+				<td colspan=3>{{ form.viaaerea }} {{ form.viaaerea.errors }}</td>
+				<td><label>Linea Aerea</label></td>
+				<td colspan=3>{{ form.lineaaerea }} {{ form.lineaaerea.errors }}</td>
+			</tr>
+			<tr>
+				<td><label>Via FFCC </label></td>
+				<td colspan=7>{{ form.viaffcc }} {{ form.viaffcc.errors }}</td>
+			</tr>
+			<tr>
+				<td><label>Via Bus</label></td>
+				<td colspan=3>{{ form.viabus }} {{ form.viabus.errors }}</td>
+				<td><label>Linea Aerea</label></td>
+				<td colspan=3>{{ form.lineabus }} {{ form.lineabus.errors }}</td>
 			</tr>
 		</tbody>
 		</table>

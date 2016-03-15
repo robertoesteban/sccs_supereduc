@@ -8,7 +8,7 @@ class CometidoForm(forms.ModelForm):
 	class Meta:
 		model = Cometido
 		fields = [
-			"nombre","rut","grado","estamento","escalafon","unidad","region","convocadopor","financiagastosde","derechoaviatico","diadesalida","horadesalida","diadellegada","horadellegada","al100","al60","al50","al40"
+			"nombre","rut","grado","estamento","escalafon","unidad","region","convocadopor","financiagastosde","derechoaviatico","diadesalida","horadesalida","diadellegada","horadellegada","al100","al60","al50","al40","viaaerea","lineaaerea","viaffcc","viabus","lineabus"
 		]
 
 	def __init__(self, *args, **kwargs):
@@ -32,6 +32,7 @@ class CometidoForm(forms.ModelForm):
 			self.fields['horadellegada'].widget.attrs['readonly'] = True
 			self.fields['horadellegada'].widget.attrs['class'] = 'form_horadellegada'
 			self.fields['nombre'].widget.attrs['size'] = 70
+			self.fields['region'].widget.attrs['size'] = 70
 			self.fields['rut'].widget.attrs['size'] = 14
 			self.fields['grado'].widget.attrs['size'] = 6
 			self.fields['estamento'].widget.attrs['size'] = 14
