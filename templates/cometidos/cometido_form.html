@@ -46,7 +46,26 @@
 		<strong>II.- ESPECIFICACION</strong>
 	</div>
 	<div style="padding: 10px;" id="especificacion">
+		<table class="table table-bordered table-hover">
+                <thead>
+                        <tr>
+                                <td width="10%"><label>Fecha </label></td>
+                                <td width="25%"><label>Establecimiento</label></td>
+                                <td width="40%"><label>Objetivo</label></td>
+                                <td width="5%"><label>Pecnoctar</label></td>
+                        </tr>
+		</thead>
+		<tbody>
+                        <tr>
+				<td>{{ destino.fecha }}</td>
+				<td>{{ destino.establecimiento }}</td>
+				<td>{{ destino.objetivo }}</td>
+				<td>{{ destino.pernoctar }}</td>
+                        </tr>
+		</tbody>
+		</table>
 	</div>
+	
 </div>
 <div class="panel panel-primary" style="text-align: justtify;">
 	<div class="panel-heading text-left">
@@ -126,6 +145,7 @@
     $("#id_diadellegada").datetimepicker({format: 'dd/mm/yyyy', minView:2, autoclose: true ,language : 'es'}).find('input').addClass("form_diadellegada");
     $("#id_horadesalida").datetimepicker({format: 'hh:ii', minView:0, maxView:1, autoclose : true , language : 'es',startView:1}).find('input').addClass("form_horadesalida");
     $("#id_horadellegada").datetimepicker({format: 'hh:ii', minView:0, maxView:1, autoclose : true , language : 'es',startView:1}).find('input').addClass("form_horadellegada");
+    $("#id_fecha").datetimepicker({format: 'dd/mm/yyyy', minView:2, autoclose : true , language : 'es'}).find('input').addClass("form_fecha");
 </script>            
 
 	

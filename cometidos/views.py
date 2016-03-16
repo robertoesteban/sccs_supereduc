@@ -22,22 +22,22 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 #from reportlab.platypus.tables import Table
+from establecimientos.models import *
+from .forms import *
+
 
 
 @login_required
 def cometido_create(request):
 
-	form = CometidoForm(request.POST or None)
-
-	if form.is_valid():
+	formCometido = CometidoForm(request.POST or None)
+	formDestino = DestinoForm()
+	if formCometido.is_valid():
 		persona = Persona.objects.get(pk=request.user)
-		instance = form.save(commit=False)
+		instance = formCometido.save(commit=False)
 		instance.rut = persona.rut
                 instance.persona = request.user
                 instance.save()
-		#formset = DestinoFormSet(request.POST or None,request.FILES,instance=instance)
-		#if formset.is_valid():
-            	#formset.save(commit=False)
                 messages.success(request, 'Cometido creado satisfactoriamente')
                 return HttpResponseRedirect(instance.get_absolute_url())
 	else:
@@ -51,39 +51,26 @@ def cometido_create(request):
 			'unidad': persona.unidad,
 			'region': persona.region
 		}
-		form = CometidoForm(initial=data)
-                #formset = DestinoFormSet()
+		formCometido = CometidoForm(initial=data)
 	context = {
-		"form": form,
-		#"formset": formset,
+		"form": formCometido,
+		"destino": formDestino,
 	}
 	return render(request, "cometidos/cometido_form.html", context)
 
 @login_required
 def cometido_detail(request, id=None):
 	instance = get_object_or_404(Cometido, id=id, persona=request.user)
-	if instance.derechoaviatico:
-		instance.derechoaviatico = 'Si'
-	else:
-		instance.derechoaviatico = 'No'	
+	instance.derechoaviatico = convierteBooleanString(instance.derechoaviatico)
 	instance.convocadopor = convocadopor(instance.convocadopor)
 	if instance.financiagastosde:
 		for indice in range(len(instance.financiagastosde)):
 			instance.financiagastosde[indice]=financiagastosde(instance.financiagastosde[indice])
 	else:	
 		instance.financiagastosde=financiagastosde(instance.financiagastosde)
-	if instance.viaaerea:
-		instance.viaaerea = "Si"
-	else:
-		instance.viaaerea = "No"
-	if instance.viaffcc:
-		instance.viaffcc = "Si"
-	else:
-		instance.viaffcc = "No"
-	if instance.viabus:
-		instance.viabus = "Si"
-	else:
-		instance.viabus = "No"
+	instance.viaaerea = convierteBooleanString(instance.viaaerea)
+	instance.viaffcc = convierteBooleanString(instance.viaffcc)
+	instance.viabus = convierteBooleanString(instance.viabus)
 	context = {
 		"title": "Detalle",
 		"instance": instance,
@@ -136,12 +123,14 @@ def cometido_print(request, id=None):
 			cometido.financiagastosde[indice]=financiagastosde(cometido.financiagastosde[indice])
 	else:	
 		cometido.financiagastosde=financiagastosde(cometido.financiagastosde)
-
-	values= [['00', '01', '02', '03', '04'],
-		['10', '11', '12', '13', '14'],
-		['20', '21', '22', '23', '24'],
-		['30', '31', '32', '33', '34']]
-
+	if cometido.diadesalida is not None:
+		cometido.diadesalida =datetime.strptime(str(cometido.diadesalida),'%Y-%m-%d').strftime('%d-%m-%Y')
+	if cometido.horadesalida is not None:
+		cometido.horadesalida = datetime.strptime(str(cometido.horadesalida),'%H:%M:%S').strftime('%H:%M')
+	if cometido.diadellegada is not None:
+		cometido.diadellegada = datetime.strptime(str(cometido.diadellegada),'%Y-%m-%d').strftime('%d-%m-%Y')
+	if cometido.horadellegada is not None:
+		cometido.horadellegada = datetime.strptime(str(cometido.horadellegada),'%H:%M:%S').strftime('%H:%M')
         data = {
 		'rut': cometido.rut,
                 'nombre': request.user.first_name + ' ' + request.user.last_name,
@@ -157,10 +146,10 @@ def cometido_print(request, id=None):
 		'al50': cometido.al50,
 		'al40': cometido.al40,
 		'derechoaviatico': convierteBooleanString(cometido.derechoaviatico),
-		'diadesalida': datetime.strptime(str(cometido.diadesalida),'%Y-%m-%d').strftime('%d-%m-%Y'),
-		'horadesalida': datetime.strptime(str(cometido.horadesalida),'%H:%M:%S').strftime('%H:%M'),
-		'diadellegada': datetime.strptime(str(cometido.diadellegada),'%Y-%m-%d').strftime('%d-%m-%Y'),
-		'horadellegada': datetime.strptime(str(cometido.horadellegada),'%H:%M:%S').strftime('%H:%M'),
+		'diadesalida': cometido.diadesalida,
+		'horadesalida': cometido.horadesalida,
+		'diadellegada': cometido.diadellegada,
+		'horadellegada': cometido.horadellegada,
                 }
 	response = HttpResponse(content_type='application/pdf')
 	filename = 'Cometido_'+id+'.pdf'
@@ -220,7 +209,6 @@ def cometido_print(request, id=None):
 	p.setFont(font_bold, size_font)
         p.drawString(1.5*cm,20*cm,"II.- ESPECIFICACION" )
         
-	p.rect(1*cm,1*cm,1*cm,1*cm)
 
 
 	#Titulo INFORMACION ADICIONAL

@@ -50,7 +50,10 @@ class DestinoForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(DestinoForm, self).__init__(*args, **kwargs)
-
-
+		instance = getattr(self, 'instance', None)
+		if instance:
+			self.fields['fecha'].widget.attrs['readonly'] = True
+                        self.fields['fecha'].widget.attrs['class'] = 'form_fecha'
+			self.fields['objetivo'].widget.attrs['size'] = 70
 #DestinoFormSet = inlineformset_factory(Cometido, Destino,fields='__all__', extra=2,can_delete=False)
 #IngredientFormSet = inlineformset_factory(Cometido, Destino)
