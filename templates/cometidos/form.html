@@ -15,25 +15,25 @@
 		<table class="table table-bordered table-hover">
 		<tbody>
 			<tr>
-				<td width="20%"><label>Nombre </label></td>
+				<td width="20%">{{ form.nombre.label_tag }}</td>
 				<td width="80%" colspan=7>{{ form.nombre }} {{ form.nombre.errors }}</td>
 			</tr>
 			<tr>
-				<td><label>Rut</label></td>
+				<td>{{ form.rut.label_tag }}</td>
 				<td>{{ form.rut }} {{ form.rut.errors }}</td>
-				<td><label>Grado</label></td>
+				<td>{{ form.rut.label_tag }}</td>
 				<td>{{ form.grado }} {{ form.grado.errors }}</td>
-				<td><label>Estamento</label></td>
+				<td>{{ form.estamento.label_tag }}</td>
 				<td colspan=3>{{ form.estamento }} {{ form.estamento.errors }}</td>
 			</tr>
 			<tr>
-				<td><label>Escalafon</label></td>
+				<td>{{ form.escalafon.label_tag }}</td>
 				<td>{{ form.escalafon }} {{ form.escalafon.errors }}</td>
-				<td><label>Unidad</label></td>
+				<td>{{ form.unidad.label_tag }}</td>
 				<td colspan=5>{{ form.unidad }} {{ form.unidad.errors }}</td>
 			</tr>
 			<tr>
-				<td><label>Region</label></td>
+				<td>{{ form.region.label_tag }}</td>
 				<td colspan=7>{{ form.region }} {{ form.region.errors }}</td>
 			</tr>
 		</tbody>
@@ -52,12 +52,18 @@
                                 <td width="10%"><label>Fecha </label></td>
                                 <td width="25%"><label>Establecimiento</label></td>
                                 <td width="40%"><label>Objetivo</label></td>
-                                <td width="5%"><label>Pecnoctar</label></td>
+                                <td width="5%"><label>Pernoctar</label></td>
                         </tr>
 		</thead>
 		<tbody>
                         <tr>
 				<td>{{ destino.fecha }}</td>
+				<td>{{ destino.establecimiento }}</td>
+				<td>{{ destino.objetivo }}</td>
+				<td>{{ destino.pernoctar }}</td>
+                        </tr>
+                        <tr>
+				<td>{{ destino.fecha}}</td>
 				<td>{{ destino.establecimiento }}</td>
 				<td>{{ destino.objetivo }}</td>
 				<td>{{ destino.pernoctar }}</td>
@@ -75,61 +81,92 @@
 		<table class="table table-bordered table-hover">
 		<tbody>
 			<tr>
-				<td width="20%"><label>Convocado por </label></td>
+				<td width="20%">{{ form.convocadopor.label_tag }}</td>
 				<td width="80%" colspan=7>{{ form.convocadopor }} {{ form.convocadopor.errors }}</td>
 			</tr>
 			<tr>
-				<td><label>Financia Gastos de </label></td>
+				<td>{{ form.financiagastosde.label_tag }}</td>
 				<td colspan=7>{{ form.financiagastosde }} {{ form.financiagastosde.errors }}</td>
 			</tr>
 			<tr>
-				<td colspan=8><strong>Viaticos</strong></td>
+				<td colspan=8><strong>Vi&aacute;ticos</strong></td>
 			</tr>
 			<tr>
-				<td><label>Dias al 100%</label></td>
+				<td>{{ form.al100.label_tag }}</td>
 				<td>{{ form.al100 }} {{ form.al100.errors }}</td>
-				<td><label>Dias al 60%</label></td>
+				<td>{{ form.al60.label_tag }}</td>
 				<td>{{ form.al60 }} {{ form.al60.errors }}</td>
-				<td><label>Dias al 50%</label></td>
+				<td>{{ form.al50.label_tag }} </td>
 				<td>{{ form.al50 }} {{ form.al50.errors }}</td>
-				<td><label>Dias al 40%</label></td>
+				<td>{{ form.al40.label_tag }}</td>
 				<td>{{ form.al40 }} {{ form.al40.errors }}</td>
 			</tr>
 			<tr>
-				<td><label>Con derecho a Viatico </label></td>
+				<td>{{ form.derechoaviatico.label_tag }}</td>
 				<td colspan=7>{{ form.derechoaviatico }} {{ form.derechoaviatico.errors }}</td>
 			</tr>
 			<tr>
-				<td><label>Dia de Salida </label></td>
+				<td>{{ form.diadesalida.label_tag }}</td>
 				<td colspan=3>{{ form.diadesalida }} {{ form.diadesalida.errors }}</td>
-				<td><label>Hora de Salida </label></td>
+				<td>{{ form.horadesalida.label_tag }}</td>
 				<td colspan=3>{{ form.horadesalida }} {{ form.horadesalida.errors }}</td>
 			</tr>
 			<tr>
-				<td><label>Dia de Llegada </label></td>
+				<td>{{ form.diadellegada.label_tag }}</td>
 				<td colspan=3>{{ form.diadellegada }} {{ form.diadellegada.errors }}</td>
-				<td><label>Hora de Llegada </label></td>
+				<td>{{ form.horadellegada.label_tag }}</td>
 				<td colspan=3>{{ form.horadellegada }} {{ form.horadellegada.errors }}</td>
 			</tr>
 			<tr>
 				<td colspan=8><strong>Medio de Transporte a utilizar para el cometido</strong></td>
 			</tr>
 			<tr>
-				<td><label>Via Aerea</label></td>
+				<td>{{ form.viaaerea.label_tag }}</td>
 				<td colspan=3>{{ form.viaaerea }} {{ form.viaaerea.errors }}</td>
-				<td><label>Linea Aerea</label></td>
+				<td>{{ form.lineaaerea.label_tag }}</td>
 				<td colspan=3>{{ form.lineaaerea }} {{ form.lineaaerea.errors }}</td>
 			</tr>
 			<tr>
-				<td><label>Via FFCC </label></td>
+				<td>{{ form.viaffcc.label_tag }}</td>
 				<td colspan=7>{{ form.viaffcc }} {{ form.viaffcc.errors }}</td>
 			</tr>
 			<tr>
-				<td><label>Via Bus</label></td>
+				<td>{{ form.viabus.label_tag }}</td>
 				<td colspan=3>{{ form.viabus }} {{ form.viabus.errors }}</td>
-				<td><label>Linea Aerea</label></td>
+				<td>{{ form.lineabus.label_tag }}</td>
 				<td colspan=3>{{ form.lineabus }} {{ form.lineabus.errors }}</td>
 			</tr>
+			<tr>
+				<td>{{ form.viavehiculofiscal.label_tag }}</td>
+				<td colspan=3>{{ form.viavehiculofiscal }} {{ form.viavehiculofiscal.errors }}</td>
+				<td>{{ form.vehiculofiscal.label_tag }}</td>
+				<td colspan=3>{{ form.vehiculofiscal }} {{ form.vehiculofiscal.errors }}</td>
+			</tr>
+			<tr>
+				<td>{{ form.viavehiculoparticular.label_tag }}</td>
+				<td colspan=3>{{ form.viavehiculoparticular }} {{ form.viavehiculoparticular.errors }}</td>
+				<td>{{ form.placapatente.label_tag }}</td>
+				<td colspan=3>{{ form.placapatente }} {{ form.placapatente.errors }}</td>
+			</tr>
+			<tr>
+				<td>{{ form.viataxitransfers.label_tag }}</td>
+				<td colspan=7>{{ form.viataxitransfers }} {{ form.viataxitransfers.errors }}</td>
+			</tr>
+			<tr>
+				<td>{{ form.viamaritima.label_tag }}</td>
+				<td colspan=7>{{ form.viamaritima }} {{ form.viamaritima.errors }}</td>
+			</tr>
+			{% if conductor %}
+			<tr>
+				<td colspan=8><strong>Solo aplica para el caso de ser conductor</strong></td>
+			</tr>
+			<tr>
+				<td><label>Kilometraje Inicial Real</label></td>
+				<td colspan=3>{{ form.kminicial }} {{ form.kminicial.errors }}</td>
+				<td><label>Kilometraje Final Estimado</label></td>
+				<td colspan=3>{{ form.kmfinal }} {{ form.kmfinal.errors }}</td>
+			</tr>
+			{% endif %}
 		</tbody>
 		</table>
 	</div>

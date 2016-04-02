@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.contrib import admin
 
-from .views import (cometido_list,cometido_create,cometido_detail,cometido_update,cometido_delete,cometido_print)
+from .views import (cometido_list,cometido_create,cometido_detail,cometido_update,cometido_delete,cometido_print,generar_pdf)
 
 urlpatterns = [
 	url(r'^$', cometido_list),
@@ -10,4 +10,5 @@ urlpatterns = [
 	url(r'^(?P<id>\d+)/edit/$', cometido_update, name='update'),
 	url(r'^delete$', cometido_delete),
 	url(r'^(?P<id>\d+)/print$', cometido_print),
+	url(r'^print/$', generar_pdf),
 ]

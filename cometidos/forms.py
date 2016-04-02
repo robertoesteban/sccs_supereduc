@@ -8,7 +8,7 @@ class CometidoForm(forms.ModelForm):
 	class Meta:
 		model = Cometido
 		fields = [
-			"nombre","rut","grado","estamento","escalafon","unidad","region","convocadopor","financiagastosde","derechoaviatico","diadesalida","horadesalida","diadellegada","horadellegada","al100","al60","al50","al40","viaaerea","lineaaerea","viaffcc","viabus","lineabus"
+			"nombre","rut","grado","estamento","escalafon","unidad","region","convocadopor","financiagastosde","derechoaviatico","diadesalida","horadesalida","diadellegada","horadellegada","al100","al60","al50","al40","viaaerea","lineaaerea","viaffcc","viabus","lineabus","viavehiculofiscal","vehiculofiscal","viavehiculoparticular","placapatente","viataxitransfers","viamaritima","kminicial","kmfinal"
 		]
 
 	def __init__(self, *args, **kwargs):
@@ -23,13 +23,13 @@ class CometidoForm(forms.ModelForm):
 			self.fields['unidad'].widget.attrs['readonly'] = True
 			self.fields['region'].widget.attrs['readonly'] = True
 			self.fields['convocadopor'].widget.attrs['readonly'] = True
-			self.fields['diadesalida'].widget.attrs['readonly'] = True
+			#self.fields['diadesalida'].widget.attrs['readonly'] = True
 			self.fields['diadesalida'].widget.attrs['class'] = 'form_diadesalida'
-			self.fields['horadesalida'].widget.attrs['readonly'] = True
+			#self.fields['horadesalida'].widget.attrs['readonly'] = True
 			self.fields['horadesalida'].widget.attrs['class'] = 'form_horadesalida'
-			self.fields['diadellegada'].widget.attrs['readonly'] = True
+			#self.fields['diadellegada'].widget.attrs['readonly'] = True
 			self.fields['diadellegada'].widget.attrs['class'] = 'form_diadellegada'
-			self.fields['horadellegada'].widget.attrs['readonly'] = True
+			#self.fields['horadellegada'].widget.attrs['readonly'] = True
 			self.fields['horadellegada'].widget.attrs['class'] = 'form_horadellegada'
 			self.fields['nombre'].widget.attrs['size'] = 70
 			self.fields['region'].widget.attrs['size'] = 70
@@ -52,7 +52,7 @@ class DestinoForm(forms.ModelForm):
 		super(DestinoForm, self).__init__(*args, **kwargs)
 		instance = getattr(self, 'instance', None)
 		if instance:
-			self.fields['fecha'].widget.attrs['readonly'] = True
+			#self.fields['fecha'].widget.attrs['readonly'] = True
                         self.fields['fecha'].widget.attrs['class'] = 'form_fecha'
 			self.fields['objetivo'].widget.attrs['size'] = 70
 #DestinoFormSet = inlineformset_factory(Cometido, Destino,fields='__all__', extra=2,can_delete=False)

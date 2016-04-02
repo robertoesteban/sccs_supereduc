@@ -9,7 +9,7 @@
 <p id="Edicion" class="text-right">
 	<a class='btn btn-default'  href='{{ obj.get_absolute_url }}edit'><i class='fa fa-pencil-square-o fa-fw'></i></a> <a class='btn  btn-default' href='{{ obj.get_absolute_url }}print'><i class='fa fa-print'></i></a>
 </p>
-<div class="panel panel-info" style="text-align: justtify;">
+<div class="panel panel-info" style="text-align: justify;">
         <div class="panel-heading text-left">
                 <strong>I.- IDENTIFICACION</strong>
         </div>
@@ -42,14 +42,14 @@
                 </table>
         </div>
 </div>
-<div class="panel panel-info" style="text-align: justtify;">
+<div class="panel panel-info" style="text-align: justify;">
         <div class="panel-heading text-left">
                 <strong>II.- ESPECIFICACION</strong>
         </div>
         <div style="padding: 10px;" id="especificacion">
         </div>
 </div>
-<div class="panel panel-info" style="text-align: justtify;">
+<div class="panel panel-info" style="text-align: justify;">
         <div class="panel-heading text-left">
                 <strong>III.- INFORMACION ADICIONAL</strong>
         </div>
@@ -69,49 +69,80 @@
 			</tr>
 			<tr>
 				<td><label>Dias al 100%</label></td>
-				<td>{{ instance.al100 }}</td>
+				<td>{{ instance.al100|default:"---" }}</td>
 				<td><label>Dias al 60%</label></td>
-				<td>{{ instance.al60 }}</td>
+				<td>{{ instance.al60|default:"---" }}</td>
 				<td><label>Dias al 50%</label></td>
-				<td>{{ instance.al50 }}</td>
+				<td>{{ instance.al50|default:"---" }}</td>
 				<td><label>Dias al 40%</label></td>
-				<td>{{ instance.al40 }}</td>
+				<td>{{ instance.al40|default:"---" }}</td>
 			</tr>
                         <tr>
                                 <td><label>Con derecho a Viatico </label></td>
-                                <td colspan=7>{{ instance.derechoaviatico }}</td>
+                                <td colspan=7>{{ instance.derechoaviatico|default:"---" }}</td>
                         </tr>
                         <tr>
                                 <td><label>Dia de Salida </label></td>
-                                <td colspan=3>{{ instance.diadesalida }}</td>
+                                <td colspan=3>{{ instance.diadesalida|default:"---" }}</td>
                                 <td><label>Hora de Salida </label></td>
-                                <td colspan=3>{{ instance.horadesalida }}</td>
+                                <td colspan=3>{{ instance.horadesalida|default:"---" }}</td>
                         </tr>
                         <tr>
                                 <td><label>Dia de Llegada </label></td>
-                                <td colspan=3>{{ instance.diadellegada }}</td>
+                                <td colspan=3>{{ instance.diadellegada|default:"---" }}</td>
                                 <td><label>Hora de Llegada </label></td>
-                                <td colspan=3>{{ instance.horadellegada }}</td>
+                                <td colspan=3>{{ instance.horadellegada|default:"---" }}</td>
                         </tr>
 			<tr>
 				<td colspan=8><strong>Medio de Transporte a utilizar para el cometido</strong></td>
 			</tr>
 			<tr>
 				<td><label>Via Aerea</label></td>
-				<td colspan=3>{{ instance.viaaerea }}</td>
+				<td colspan=3>{{ instance.viaaerea|default:"---" }}</td>
 				<td><label>Linea Aerea</label></td>
-				<td colspan=3>{{ instance.lineaaerea }}</td>
+				<td colspan=3>{{ instance.lineaaerea|default:"---" }}</td>
 			</tr>
 			<tr>
 				<td><label>Via FFCC </label></td>
-				<td colspan=7>{{ instance.viaffcc }}</td>
+				<td colspan=7>{{ instance.viaffcc|default:"---" }}</td>
 			</tr>
 			<tr>
 				<td><label>Via Bus</label></td>
-				<td colspan=3>{{ instance.viabus }}</td>
+				<td colspan=3>{{ instance.viabus|default:"---" }}</td>
 				<td><label>Linea Aerea</label></td>
-				<td colspan=3>{{ instance.lineabus }} </td>
+				<td colspan=3>{{ instance.lineabus|default:"---" }} </td>
 			</tr>
+			<tr>
+				<td><label>Via Vehiculo Fiscal</label></td>
+				<td colspan=3>{{ instance.viavehiculofiscal|default:"---" }}</td>
+				<td><label>Vehiculo Fiscal</label></td>
+				<td colspan=3>{{ instance.vehiculofiscal|default:"---" }} </td>
+			</tr>
+			<tr>
+				<td><label>Vía Vehiculo Particular</label></td>
+				<td colspan=3>{{ instance.viavehiculoparticular|default:"---" }}</td>
+				<td><label>Placa Patente</label></td>
+				<td colspan=3>{{ instance.placapatente|default:"---" }} </td>
+			</tr>
+			<tr>
+				<td><label>Via Taxi o Transfers </label></td>
+				<td colspan=7>{{ instance.viataxitransfers|default:"---" }}</td>
+			</tr>
+			<tr>
+				<td><label>Via Maritima </label></td>
+				<td colspan=7>{{ instance.viamaritima|default:"---" }}</td>
+			</tr>
+			{% if conductor %}
+			<tr>
+				<td colspan=8><strong>Solo aplica para el caso de ser conductor</strong></td>
+			</tr>
+			<tr>
+				<td><label>Kilometraje Inicial Real</label></td>
+				<td colspan=3>{{ instance.kminicial|default:"---" }}</td>
+				<td><label>Kilometraje Final Estimado</label></td>
+				<td colspan=3>{{ instance.kmfinal|default:"---" }} </td>
+			</tr>
+			{% endif %}
                 </tbody>
                 </table>
         </div>

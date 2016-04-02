@@ -1,6 +1,6 @@
+<!DOCTYPE html>
 {% load staticfiles %}
 {% load render_table from django_tables2 %}
-<!DOCTYPE html>
 <html>
 <head>
 	<title>{% block head_title %}Sistema Cometidos{% endblock head_title %}</title>
@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href='{% static "css/font-awesome.min.css" %}'/>
 	<link rel="stylesheet" href='{% static "css/jasny-bootstrap.css.map" %}'/>
 	<link rel="stylesheet" href='{% static "css/bootstrap-datetimepicker.min.css" %}' media="screen">
+	<link rel='stylesheet' href='{% static "css/datetimepicker.css" %}' />
 	
 <!--<link rel="stylesheet" type="text/css" href="/media/admin/css/forms.css"/>
 <link rel="stylesheet" type="text/css" href="/media/admin/css/base.css"/>
@@ -68,8 +69,9 @@
  <footer> 
             <div id="ribbon" style="text-align: center"> 
                 <!--<address>-->
-                <p style="font-size: 11px; margin-left: 32px; margin-top: 10px;"><b>Superintendencia de Educaci&oacute;n</b></p>
-                <a href="#top" >Ir arriba</a> 
+                <p style="font-size: 10px;  margin-top: 6px; margin-bottom: 0px;"><b>Superintendencia de Educaci&oacute;n Escolar</b></p>
+                <p style="font-size: 9px;  margin-top: 1px; "><b>Desarrollado por @robertoesteban</b></p>
+                <a href="/admin" >Ir arriba</a> 
             </div>
         </footer>
 {% endblock footer %}

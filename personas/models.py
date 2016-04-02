@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 from django.db import models
@@ -67,6 +68,16 @@ class RutField(models.CharField):
                 return super(RutField, self).formfield(**defaults)
 
 
+class Actividad(models.Model):
+        nombre = models.CharField("Actividad", max_length=60, blank=False, null=False)
+
+        def __str__(self):
+                return self.nombre
+
+        class Meta:
+                ordering = ['nombre']
+                verbose_name_plural = 'Actividades'
+
 class Persona(User):
         rut = RutField("Rut", unique=True, help_text='Ejemplo: 12.345.678-K')
 	nombres = models.CharField("Nombres", max_length=60, blank=False, null=False)
@@ -80,6 +91,7 @@ class Persona(User):
 	escalafon = models.ForeignKey("Escalafon",Escalafon)
 	unidad = models.ForeignKey("Unidad",Unidad)
 	region = models.ForeignKey(Region)
+	actividad = models.ForeignKey(Actividad,related_name='actividades',related_query_name='actividad')
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
         timestamp = models.DateTimeField(auto_now = False, auto_now_add=True)
 
@@ -96,6 +108,7 @@ class Persona(User):
 	def save(self):
 		self.username = self.usuario
 		rutlimpio = self.rut.replace('.','',2).replace('-','')
+		print rutlimpio[len(self.rut)-10:len(self.rut)-4]
 		self.set_password(rutlimpio[len(self.rut)-10:len(self.rut)-4])
 		self.first_name = self.nombres
 		self.last_name = self.paterno + " " + self.materno
@@ -112,3 +125,7 @@ class Persona(User):
                 super(Persona,self).user_permissions.add(permission)
 		permission = Permission.objects.get(codename='delete_destino')
                 super(Persona,self).user_permissions.add(permission)
+
+
+
+
