@@ -14,7 +14,6 @@ from django.views.generic import CreateView, ListView
 # Create your views here.
 from .forms import CometidoForm, DestinoForm #,DestinoFormSet
 from .models import Cometido, Destino
-from .tables import CometidoTable
 from personas.models import *
 from establecimientos.models import *
 
@@ -22,7 +21,7 @@ from establecimientos.models import *
 from reportlab.platypus import SimpleDocTemplate, Paragraph, TableStyle, Table,Image
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import letter
+from reportlab.lib.pagesizes import letter, legal
 from reportlab.lib.enums import TA_LEFT, TA_CENTER,TA_JUSTIFY
 from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
@@ -39,6 +38,7 @@ def cometido_create(request):
 		instance.rut = persona.rut
                 instance.persona = request.user
                 instance.save()
+		formCometido.save_m2m()
                 messages.success(request, 'Cometido creado satisfactoriamente')
                 return HttpResponseRedirect(instance.get_absolute_url())
 	else:
@@ -68,11 +68,7 @@ def cometido_detail(request, id=None):
 	persona = Persona.objects.get(pk=request.user)
 	instance.derechoaviatico = convierteBooleanString(instance.derechoaviatico)
 	instance.convocadopor = convocadopor(instance.convocadopor)
-	if instance.financiagastosde:
-		for indice in range(len(instance.financiagastosde)):
-			instance.financiagastosde[indice]=financiagastosde(instance.financiagastosde[indice])
-	else:	
-		instance.financiagastosde=financiagastosde(instance.financiagastosde)
+	tipofinanciamiento = instance.tipofinanciamiento.all()
 	instance.viaaerea = convierteBooleanString(instance.viaaerea)
 	instance.viaffcc = convierteBooleanString(instance.viaffcc)
 	instance.viabus = convierteBooleanString(instance.viabus)
@@ -91,22 +87,17 @@ def cometido_detail(request, id=None):
 		"title": "Detalle",
 		"instance": instance,
 		"conductor": conductor,
+		"tipofinanciamiento": tipofinanciamiento,
 	}
 	return render(request, "cometidos/detail.html", context)
 
 
 @login_required
 def cometido_list(request):
-	#queryset = Cometido.objects.all()
 	queryset = Cometido.objects.filter(persona=Persona.objects.get(pk=request.user))
-	#cant = queryset.count()
-	#print queryset
-	example2 = CometidoTable(queryset, prefix="5-")
-	RequestConfig(request, paginate={"per_page": 10}).configure(example2)
 	context = {
 		"object_list": queryset,
 		"title": "Lista Cometidos",
-		"example2": example2,
 	}
 	return render(request, "cometidos/index.html", context)
 
@@ -118,6 +109,7 @@ def cometido_update(request, id=None):
         if form.is_valid():
                 instance = form.save(commit=False)
                 instance.save()
+		form.save_m2m()
                 messages.success(request, 'Cometido actualizado satisfactoriamente')
                 return HttpResponseRedirect(instance.get_absolute_url())
 	conductor = False
@@ -138,12 +130,8 @@ def cometido_delete(request):
 @login_required
 def cometido_print(request, id=None):
 	instance = get_object_or_404(Cometido, id=id, persona=request.user)
+	tipofinanciamiento = instance.tipofinanciamiento.all()
 	cometido  = Cometido.objects.get(id=id)
-	if cometido.financiagastosde:
-		for indice in range(len(cometido.financiagastosde)):
-			cometido.financiagastosde[indice]=financiagastosde(cometido.financiagastosde[indice])
-	else:	
-		cometido.financiagastosde=financiagastosde(cometido.financiagastosde)
 	if cometido.diadesalida is not None:
 		cometido.diadesalida =datetime.strptime(str(cometido.diadesalida),'%Y-%m-%d').strftime('%d-%m-%Y')
 	if cometido.horadesalida is not None:
@@ -161,7 +149,7 @@ def cometido_print(request, id=None):
                 'unidad': cometido.unidad,
                 'region': cometido.region,
 		'convocadopor': convocadopor(cometido.convocadopor),
-		'financiagastosde': cometido.financiagastosde,
+		'financiagastosde': tipofinanciamiento,
 		'al100': cometido.al100,
 		'al60': cometido.al60,
 		'al50': cometido.al50,
@@ -179,56 +167,58 @@ def cometido_print(request, id=None):
 	font="Helvetica"
 	font_bold = "Helvetica-Bold"
 	size_font = 12
-	p = canvas.Canvas(response)
+	p = canvas.Canvas(response,pagesize=legal)
+
+
 	p.setStrokeColorRGB(0,0,0)
-	p.drawImage(logo,1*cm,26*cm,5*cm,2.5*cm)
+	p.drawImage(logo,1*cm,32*cm,5*cm,2.5*cm)
         
 	p.setFont(font_bold, 14)
-        p.drawString(2.3*cm,25*cm,"SOLICITUD DE COMETIDOS Y COMISIONES DE SERVICIO Nro  " + id )
+        p.drawString(2.3*cm,31*cm,"SOLICITUD DE COMETIDOS Y COMISIONES DE SERVICIO Nro  " + id )
         
 	p.setFont(font_bold, size_font)
-        p.drawString(1.5*cm,24*cm,"I.- IDENTIFICACION" )
+        p.drawString(1.5*cm,30*cm,"I.- IDENTIFICACION" )
         
 	p.setFont(font_bold, size_font)
-        p.drawString(1.5*cm,23*cm,"Nombre Completo" )
+        p.drawString(1.5*cm,29*cm,"Nombre Completo" )
 	p.setFont(font, size_font)
-        p.drawString(5.5*cm,23*cm,data['nombre'] )
-        p.line(5.5*cm,22.9*cm,18*cm,22.9*cm)
+        p.drawString(5.5*cm,29*cm,data['nombre'] )
+        p.line(5.5*cm,28.9*cm,18*cm,28.9*cm)
 	p.setFont(font_bold, size_font)
-        p.drawString(1.5*cm,22.3*cm,"Rut")
+        p.drawString(1.5*cm,28.3*cm,"Rut")
 	p.setFont(font, size_font)
-        p.drawString(5.5*cm,22.3*cm,data['rut'])
-        p.line(5.5*cm,22.2*cm,8.5*cm,22.2*cm)
+        p.drawString(5.5*cm,28.3*cm,data['rut'])
+        p.line(5.5*cm,28.2*cm,8.5*cm,28.2*cm)
 	p.setFont(font_bold, size_font)
-        p.drawString(9*cm,22.3*cm,"Grado")
+        p.drawString(9*cm,28.3*cm,"Grado")
 	p.setFont(font, size_font)
-        p.drawString(10.7*cm,22.3*cm,data['grado'])
-        p.line(10.5*cm,22.2*cm,11.5*cm,22.2*cm)
+        p.drawString(10.7*cm,28.3*cm,data['grado'])
+        p.line(10.5*cm,28.2*cm,11.5*cm,28.2*cm)
 	p.setFont(font_bold, size_font)
-        p.drawString(12*cm,22.3*cm,"Estamento")
+        p.drawString(12*cm,28.3*cm,"Estamento")
 	p.setFont(font, size_font)
-        p.drawString(14.8*cm,22.3*cm,data['estamento'])
-        p.line(14.5*cm,22.2*cm,18*cm,22.2*cm)
+        p.drawString(14.8*cm,28.3*cm,data['estamento'])
+        p.line(14.5*cm,28.2*cm,18*cm,28.2*cm)
 	p.setFont(font_bold, size_font)
-        p.drawString(1.5*cm,21.6*cm,"Calidad Juridica")
+        p.drawString(1.5*cm,27.6*cm,"Calidad Juridica")
 	p.setFont(font, size_font)
-        p.drawString(5.5*cm,21.6*cm,data['escalafon'])
-        p.line(5.5*cm,21.5*cm,18*cm,21.5*cm)
+        p.drawString(5.5*cm,27.6*cm,data['escalafon'])
+        p.line(5.5*cm,27.5*cm,18*cm,27.5*cm)
 	p.setFont(font_bold, size_font)
-        p.drawString(1.5*cm,20.9*cm,"Dependencia")
+        p.drawString(1.5*cm,26.9*cm,"Dependencia")
 	p.setFont(font, size_font)
-        p.drawString(5.5*cm,20.9*cm,"Unidad de ")
+        p.drawString(5.5*cm,26.9*cm,"Unidad de ")
 	p.setFont(font, size_font)
-        p.drawString(7.5*cm,20.9*cm,data['unidad'])
+        p.drawString(7.5*cm,26.9*cm,data['unidad'])
 	p.setFont(font_bold, size_font)
-        p.line(5.5*cm,20.8*cm,10.5*cm,20.8*cm)
-        p.drawString(10.7*cm,20.9*cm,"Direccion ")
+        p.line(5.5*cm,26.8*cm,10.5*cm,26.8*cm)
+        p.drawString(10.7*cm,26.9*cm,"Direccion ")
 	p.setFont(font, size_font)
-        p.drawString(12.7*cm,20.9*cm,data['region'])
-        p.line(12.7*cm,20.8*cm,18*cm,20.8*cm)
+        p.drawString(12.7*cm,26.9*cm,data['region'])
+        p.line(12.7*cm,26.8*cm,18*cm,26.8*cm)
         #Titulo ESPECIFICACION
 	p.setFont(font_bold, size_font)
-        p.drawString(1.5*cm,20*cm,"II.- ESPECIFICACION" )
+        p.drawString(1.5*cm,26*cm,"II.- ESPECIFICACION" )
         
 
 
@@ -245,8 +235,8 @@ def cometido_print(request, id=None):
         p.drawString(1.5*cm,12.7*cm,"Financia gastos de" )
         p.setFont(font, size_font)
 	x = 5.5
-	for i in range(len(cometido.financiagastosde)):
-        	p.drawString(x*cm,12.7*cm,cometido.financiagastosde[i])
+	for i in tipofinanciamiento:
+        	p.drawString(x*cm,12.7*cm,i.nombre)
 		x = x + 2.8
         p.line(5.5*cm,12.6*cm,18*cm,12.6*cm)
 	#Subtitulo VIATICOS
@@ -309,7 +299,9 @@ def cometido_print(request, id=None):
 	#Subtitulo MEDIOS DE TRANSPORTE
         p.setFont(font_bold, size_font)
         p.drawString(1.5*cm,8.7*cm,"Medio de transporte a utilizar para el viatico" )
-	
+
+	#if cometido.viaaerea:
+		 	
 
 	p.showPage()
 	p.save()

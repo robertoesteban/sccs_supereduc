@@ -10,7 +10,7 @@ from mediosdetransporte.models import *
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django import forms
-from multiselectfield import MultiSelectField
+#from multiselectfield import MultiSelectField
 
 # Create your models here.
 
@@ -21,10 +21,40 @@ OPCIONES_CONVOCADOPOR = (
         )
 
 
-OPCIONES_FINANCIAGASTOSDE = (
-        ('AJ','Alojamiento'),
-        ('AM','Alimentacion'),
-        )
+class Financiagastosde(models.Model):
+	nombre = models.CharField("Financia Gastos de", max_length=60, blank=False, null=False)
+	
+	def __str__(self):
+		return self.nombre
+
+	class Meta:
+		ordering = ['nombre']
+
+class Tipodecometido(models.Model):
+	nombre = models.CharField("Tipo de Cometido", max_length=60, blank=False, null=False)
+	
+	def __str__(self):
+		return self.nombre
+
+	class Meta:
+		ordering = ['nombre']
+                verbose_name_plural = 'Tipos de Cometidos'
+	
+
+class Tramo(models.Model):
+	tramo = models.CharField("Tramo", max_length=10, blank=False, null=False)
+	porcentaje = models.CharField("Ponderación", max_length=3,choices=OPCIONES_PONDERACION)
+	inicio = models.ForeignKey(Grado, related_name="inicial")
+	fin = models.ForeignKey(Grado, related_name="final")
+	monto = models.PositiveIntegerField("Monto", default=0)
+
+        def __str__(self):
+		return u'El monto es %s '%(self.monto)
+
+        class Meta:
+                ordering = ['tramo']
+                verbose_name_plural = 'Tramos'
+
 
 class Cometido(models.Model):
 	rut = models.CharField("Rut",max_length=12,blank=False,null=False)
@@ -36,16 +66,16 @@ class Cometido(models.Model):
 	unidad = models.CharField("Unidad",max_length=60,blank=False,null=False)
 	region = models.CharField("Región",max_length=60,blank=False,null=False)
 	convocadopor = models.CharField("Convocado por", max_length=2, choices=OPCIONES_CONVOCADOPOR,blank=True, null=True)
-	financiagastosde = MultiSelectField(choices=OPCIONES_FINANCIAGASTOSDE,blank=True, null=True,verbose_name='Financia Gastos de')
+	tipofinanciamiento = models.ManyToManyField(Financiagastosde,blank=True,verbose_name='Financia Gastos de')
+	al100 = models.PositiveIntegerField("Días al 100%", default=0)
+	al60 = models.PositiveIntegerField("Días al 60%", default=0)
+	al50 = models.PositiveIntegerField("Días al 50%", default=0)
+	al40 = models.PositiveIntegerField("Días al 40%", default=0)
 	derechoaviatico = models.BooleanField("Con derecho a viático",default=False) 
 	diadesalida = models.DateField("Día de salida",blank=True, null=True)
 	horadesalida = models.TimeField("Hora de salida",blank=True, null=True)
 	diadellegada = models.DateField("Día de llegada",blank=True, null=True)
 	horadellegada = models.TimeField("Hora de llegada",blank=True, null=True)
-	al100 = models.PositiveIntegerField("Días al 100%", default=0)
-	al60 = models.PositiveIntegerField("Días al 60%", default=0)
-	al50 = models.PositiveIntegerField("Días al 50%", default=0)
-	al40 = models.PositiveIntegerField("Días al 40%", default=0)
 	viaaerea = models.BooleanField("Vía Aérea",default=False)
 	lineaaerea = models.ForeignKey(LineaAerea,blank=True, null=True, verbose_name="Línea Aérea")
 	viaffcc = models.BooleanField("Vía FFCC",default=False)
@@ -59,6 +89,8 @@ class Cometido(models.Model):
 	viamaritima = models.BooleanField("Via Marítima",default=False)
 	kminicial = models.PositiveIntegerField("Kilometraje Incial Real", blank=True,null=True)
 	kmfinal = models.PositiveIntegerField("Kilometraje Final Estimado", blank=True,null=True)
+	draft = models.BooleanField("Borrador",default=True)
+	tipocometido = models.ForeignKey(Tipodecometido,blank=True,null=True,verbose_name='Tipo de Cometido')
 	actualizado = models.DateTimeField('Actualizado',auto_now=True, auto_now_add=False)
         creado = models.DateField('Creado',auto_now = False, auto_now_add=True)
 
@@ -71,6 +103,10 @@ class Cometido(models.Model):
 
 	def get_absolute_url(self):
 		return reverse("cometidos:detail", kwargs={"id": self.id})
+
+class Resolucion(models.Model):
+	numero = models.PositiveIntegerField("Número de Resolución", default=0)
+	
 
 class Destino(models.Model):
 	fecha = models.DateField("Fecha", blank=False,null=False)

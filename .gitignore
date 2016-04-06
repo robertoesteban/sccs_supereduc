@@ -69,6 +69,7 @@ territorios/migrations/
 cometidos/migrations/
 establecimientos/migrations/
 mediosdetransporte/migrations/
+home/migrations/
 db.sqlite3
 ScriptInicial.sh
 CargaInicial2.py

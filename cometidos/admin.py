@@ -13,7 +13,7 @@ class CometidoAdmin(admin.ModelAdmin):
 #	readonly_fields = ( 'nombre','rut','grado')
 	fieldsets = (
 		('Informacion Personal', {'fields': [ 'nombre',( 'rut','grado','estamento','escalafon'), 'unidad'],  'classes': ['collapse']}),
-		('Especificaciones', {'fields': ['convocadopor'], 'classes': ['collapse'] }),
+		('Especificaciones', {'fields': ['convocadopor','tipofinanciamiento'], 'classes': ['collapse'] }),
 	)
 
 	
@@ -48,3 +48,5 @@ class CometidoAdmin(admin.ModelAdmin):
 	inlines = [DestinoInline]
 
 admin.site.register(Cometido,CometidoAdmin)
+admin.site.register(Financiagastosde)
+admin.site.register(Tramo)

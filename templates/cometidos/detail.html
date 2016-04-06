@@ -62,7 +62,7 @@
                         </tr>
                         <tr>
                                 <td><label>Financia Gastos de </label></td>
-                                <td colspan=7>{{ instance.financiagastosde }}</td>
+                                <td colspan=7>{% if tipofinanciamiento %}{% for tipo in tipofinanciamiento %} {{ tipo.nombre }} <br/> {% endfor %} {% else %} --- {% endif %}</td>
                         </tr>
 			<tr>
 				<td colspan=8><strong>VIATICOS</strong></td>

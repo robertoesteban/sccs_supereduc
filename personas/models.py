@@ -16,6 +16,13 @@ OPCIONES_GENERO = (
 	)
 
 
+OPCIONES_PONDERACION = (
+	('100','al 100%'),
+	('60','al 60%'),
+	('50','al 50%'),
+	('40','al 40%'),
+	)
+
 class Grado(models.Model):
 	numero = models.PositiveIntegerField()
 
@@ -78,6 +85,7 @@ class Actividad(models.Model):
                 ordering = ['nombre']
                 verbose_name_plural = 'Actividades'
 
+
 class Persona(User):
         rut = RutField("Rut", unique=True, help_text='Ejemplo: 12.345.678-K')
 	nombres = models.CharField("Nombres", max_length=60, blank=False, null=False)
@@ -108,23 +116,23 @@ class Persona(User):
 	def save(self):
 		self.username = self.usuario
 		rutlimpio = self.rut.replace('.','',2).replace('-','')
-		print rutlimpio[len(self.rut)-10:len(self.rut)-4]
+		#print rutlimpio[len(self.rut)-10:len(self.rut)-4]
 		self.set_password(rutlimpio[len(self.rut)-10:len(self.rut)-4])
 		self.first_name = self.nombres
 		self.last_name = self.paterno + " " + self.materno
 		self.email = self.correo
 		self.is_staff = True
 		super(Persona,self).save()
-		permission = Permission.objects.get(codename='change_cometido')
-		super(Persona,self).user_permissions.add(permission)
-		permission = Permission.objects.get(codename='add_cometido')
-		super(Persona,self).user_permissions.add(permission)
-		permission = Permission.objects.get(codename='add_destino')
-		super(Persona,self).user_permissions.add(permission)
-		permission = Permission.objects.get(codename='change_destino')
-                super(Persona,self).user_permissions.add(permission)
-		permission = Permission.objects.get(codename='delete_destino')
-                super(Persona,self).user_permissions.add(permission)
+		#permission = Permission.objects.get(codename='change_cometido')
+		#super(Persona,self).user_permissions.add(permission)
+		#permission = Permission.objects.get(codename='add_cometido')
+		#super(Persona,self).user_permissions.add(permission)
+		#permission = Permission.objects.get(codename='add_destino')
+		#super(Persona,self).user_permissions.add(permission)
+		#permission = Permission.objects.get(codename='change_destino')
+                #super(Persona,self).user_permissions.add(permission)
+		#permission = Permission.objects.get(codename='delete_destino')
+                #super(Persona,self).user_permissions.add(permission)
 
 
 

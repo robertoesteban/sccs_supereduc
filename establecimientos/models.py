@@ -4,7 +4,7 @@ from django.db import models
 from localflavor.cl.forms import CLRutField
 from django.utils import timezone
 from territorios.models import Comuna
-from django_google_maps import fields as map_fields
+#from django_google_maps import fields as map_fields
 
 
 OPCIONES_GENERO = (
@@ -48,8 +48,8 @@ class Establecimiento(models.Model):
         rbd = models.CharField("RBD",unique=True,max_length=12,blank=False,null=False)
 	nombre = models.CharField("Nombre", max_length=60, blank=False, null=False)
 	sostenedor = models.ForeignKey("Sostenedor",Sostenedor)
-	address = map_fields.AddressField(max_length=200)
-	geolocation = map_fields.GeoLocationField(max_length=100)
+#	address = map_fields.AddressField(max_length=200)
+#	geolocation = map_fields.GeoLocationField(max_length=100)
 
 	def __str__(self):
                 return self.nombre
