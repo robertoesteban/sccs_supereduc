@@ -8,7 +8,7 @@ class CometidoForm(forms.ModelForm):
 	class Meta:
 		model = Cometido
 		fields = [
-			"nombre","rut","grado","estamento","escalafon","unidad","region","convocadopor","derechoaviatico","diadesalida","horadesalida","diadellegada","horadellegada","al100","al60","al50","al40","viaaerea","lineaaerea","viaffcc","viabus","lineabus","viavehiculofiscal","vehiculofiscal","viavehiculoparticular","placapatente","viataxitransfers","viamaritima","kminicial","kmfinal","tipofinanciamiento"
+			"nombre","rut","grado","estamento","escalafon","unidad","region","convocadopor","derechoaviatico","diadesalida","horadesalida","diadellegada","horadellegada","al100","al60","al50","al40","viaaerea","lineaaerea","viaffcc","viabus","lineabus","viavehiculofiscal","vehiculofiscal","viavehiculoparticular","placapatente","viataxitransfers","viamaritima","kminicial","kmfinal","tipofinanciamiento","gastoscombustiblepeaje","gastosmovilizacion","gastosenvehiculoparticular","observaciones"
 		]
 		widgets ={
 			'tipofinanciamiento': forms.CheckboxSelectMultiple,
@@ -39,6 +39,8 @@ class CometidoForm(forms.ModelForm):
 			self.fields['al60'].widget.attrs['size'] = 2
 			self.fields['al50'].widget.attrs['size'] = 2
 			self.fields['al40'].widget.attrs['size'] = 2
+			self.fields['observaciones'].widget.attrs['cols'] = 100
+			self.fields['observaciones'].widget.attrs['rows'] = 4
 
 
 

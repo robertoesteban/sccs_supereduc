@@ -29,9 +29,9 @@
                                 <td><label>{{ obj.actualizado | date:"D, d/m/Y" }}</label></td>
                                 <td><label>{{ obj.nombre }}</label></td>
                                 <td><a class='btn btn-default'  href='{{ obj.get_absolute_url }}edit'><i class='fa fa-pencil-square-o fa-fw'></i></a><a class='btn btn-default' href='{{ obj.get_absolute_url }}'> <i class='fa fa-eye fa-fw'></i></a></td>
-				<td><label>{{ obj.id }}</label></td>
-				<td><label>{{ obj.id }}</label></td>
-				<td><label>{{ obj.id }}</label></td>
+				<td><button type='button' class='btn btn-danger btn-xs text-center'>Pendiente</button></td>
+				<td><button type='button' class='btn btn-warning btn-xs'>En Proceso</button></td>
+				<td><button type='button' class='btn btn-primary btn-xs'>Aprobado</button></td>
                         </tr>
 		</tbody>
 		{% endfor %}

@@ -92,6 +92,10 @@
 				<td colspan=8><strong>Vi&aacute;ticos</strong></td>
 			</tr>
 			<tr>
+				<td>{{ form.derechoaviatico.label_tag }}</td>
+				<td colspan=7>{{ form.derechoaviatico }} {{ form.derechoaviatico.errors }}</td>
+			</tr>
+			<tr>
 				<td>{{ form.al100.label_tag }}</td>
 				<td>{{ form.al100 }} {{ form.al100.errors }}</td>
 				<td>{{ form.al60.label_tag }}</td>
@@ -100,10 +104,6 @@
 				<td>{{ form.al50 }} {{ form.al50.errors }}</td>
 				<td>{{ form.al40.label_tag }}</td>
 				<td>{{ form.al40 }} {{ form.al40.errors }}</td>
-			</tr>
-			<tr>
-				<td>{{ form.derechoaviatico.label_tag }}</td>
-				<td colspan=7>{{ form.derechoaviatico }} {{ form.derechoaviatico.errors }}</td>
 			</tr>
 			<tr>
 				<td>{{ form.diadesalida.label_tag }}</td>
@@ -156,6 +156,19 @@
 				<td>{{ form.viamaritima.label_tag }}</td>
 				<td colspan=7>{{ form.viamaritima }} {{ form.viamaritima.errors }}</td>
 			</tr>
+			<tr>
+				<td colspan=8><strong>Gastos estimados a ejecutar durante el cometido</strong></td>
+			</tr>
+			<tr>
+				<td>{{ form.gastoscombustiblepeaje.label_tag }}</td>
+				<td colspan=7>{{ form.gastoscombustiblepeaje }} {{ form.gastoscombustiblepeaje.errors }}</td>
+			</tr>
+			<tr>
+				<td>{{ form.gastosmovilizacion.label_tag }}</td>
+				<td colspan=3>{{ form.gastosmovilizacion }} {{ form.gastosmovilizacion.errors }}</td>
+				<td>{{ form.gastosenvehiculoparticular.label_tag }}</td>
+				<td colspan=3>{{ form.gastosenvehiculoparticular }} {{ form.gastosenvehiculoparticular.errors }}</td>
+			</tr>
 			{% if conductor %}
 			<tr>
 				<td colspan=8><strong>Solo aplica para el caso de ser conductor</strong></td>
@@ -167,6 +180,13 @@
 				<td colspan=3>{{ form.kmfinal }} {{ form.kmfinal.errors }}</td>
 			</tr>
 			{% endif %}
+			<tr>
+				<td colspan=8><strong>Comentario y/o informacion adicional</strong></td>
+			</tr>
+			<tr>
+				<td>{{ form.observaciones.label_tag }}</td>
+				<td colspan=7>{{ form.observaciones }} {{ form.observaciones.errors }}</td>
+			</tr>
 		</tbody>
 		</table>
 	</div>

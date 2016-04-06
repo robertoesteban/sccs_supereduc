@@ -67,6 +67,10 @@
 			<tr>
 				<td colspan=8><strong>VIATICOS</strong></td>
 			</tr>
+                        <tr>
+                                <td><label>Con derecho a Viatico </label></td>
+                                <td colspan=7>{{ instance.derechoaviatico|default:"---" }}</td>
+                        </tr>
 			<tr>
 				<td><label>Dias al 100%</label></td>
 				<td>{{ instance.al100|default:"---" }}</td>
@@ -77,10 +81,6 @@
 				<td><label>Dias al 40%</label></td>
 				<td>{{ instance.al40|default:"---" }}</td>
 			</tr>
-                        <tr>
-                                <td><label>Con derecho a Viatico </label></td>
-                                <td colspan=7>{{ instance.derechoaviatico|default:"---" }}</td>
-                        </tr>
                         <tr>
                                 <td><label>Dia de Salida </label></td>
                                 <td colspan=3>{{ instance.diadesalida|default:"---" }}</td>
@@ -109,7 +109,7 @@
 			<tr>
 				<td><label>Via Bus</label></td>
 				<td colspan=3>{{ instance.viabus|default:"---" }}</td>
-				<td><label>Linea Aerea</label></td>
+				<td><label>Empresa de Bus</label></td>
 				<td colspan=3>{{ instance.lineabus|default:"---" }} </td>
 			</tr>
 			<tr>
@@ -132,6 +132,19 @@
 				<td><label>Via Maritima </label></td>
 				<td colspan=7>{{ instance.viamaritima|default:"---" }}</td>
 			</tr>
+			<tr>
+				<td colspan=8><strong>Gastos estimados a ejecutar durante el cometido</strong></td>
+			</tr>
+			<tr>
+				<td><label>Combustible - Peaje</label></td>
+				<td colspan=7>{{ instance.gastoscombustiblepeaje|default:"---" }}</td>
+			</tr>
+			<tr>
+				<td><label>Gastos de movilizacion</label></td>
+				<td colspan=3>{{ instance.gastosmovilizacion|default:"---" }}</td>
+				<td><label>Vehiculo Particular</label></td>
+				<td colspan=3>{{ instance.gastosenvehiculoparticular|default:"---" }} </td>
+			</tr>
 			{% if conductor %}
 			<tr>
 				<td colspan=8><strong>Solo aplica para el caso de ser conductor</strong></td>
@@ -143,6 +156,13 @@
 				<td colspan=3>{{ instance.kmfinal|default:"---" }} </td>
 			</tr>
 			{% endif %}
+			<tr>
+				<td colspan=8><strong>Comentario y/o observacion adicional</strong></td>
+			</tr>
+			<tr>
+				<td><label>Observaciones</label></td>
+				<td colspan=7>{{ instance.observaciones|default:"---" }}</td>
+			</tr>
                 </tbody>
                 </table>
         </div>
